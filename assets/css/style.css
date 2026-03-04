@@ -164,36 +164,42 @@ ul {
 .header-brand {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
+  flex-shrink: 0;
 }
 
 .header-logo {
   display: flex;
   align-items: center;
+  line-height: 1;
 }
 
 .logo-img {
-  height: 40px;
+  height: 36px;
   width: auto;
+  display: block;
 }
 
 .header-affiliation {
   display: flex;
-  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
 }
 
 .affiliation-ja {
-  font-size: 11px;
-  color: rgba(255,255,255,0.8);
-  letter-spacing: 0.02em;
+  font-size: 10px;
+  color: rgba(255,255,255,0.75);
+  letter-spacing: 0.01em;
   white-space: nowrap;
+  line-height: 1.4;
 }
 
 /* Header right (nav + lang + theme + menu) */
 .header-right {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
+  flex-shrink: 0;
 }
 
 /* Theme toggle button */
@@ -201,13 +207,13 @@ ul {
   background: transparent;
   border: 1px solid rgba(255,255,255,0.25);
   border-radius: 6px;
-  width: 32px;
-  height: 32px;
+  padding: 5px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.2s;
+  line-height: 1;
 }
 
 .theme-toggle:hover {
@@ -216,8 +222,9 @@ ul {
 }
 
 .theme-toggle .material-icons-outlined {
-  font-size: 18px;
-  color: rgba(255,255,255,0.9);
+  font-size: 16px;
+  color: rgba(255,255,255,0.8);
+  display: block;
 }
 
 .theme-toggle .icon-dark { display: none; }
@@ -325,7 +332,18 @@ ul {
 a:focus, button:focus { outline: 2px solid #93c5fd; outline-offset: 2px; }
 
 .lang-switch { display:flex; align-items:center; gap:4px; }
-.lang-switch button { font-size:11px; font-weight:700; color:rgba(255,255,255,0.7); background:transparent; border:1px solid rgba(255,255,255,0.25); padding:5px 8px; border-radius:6px; cursor:pointer; transition: all 0.2s; }
+.lang-switch button {
+  font-size:11px;
+  font-weight:700;
+  color:rgba(255,255,255,0.7);
+  background:transparent;
+  border:1px solid rgba(255,255,255,0.25);
+  padding:6px 10px;
+  border-radius:6px;
+  cursor:pointer;
+  transition: all 0.2s;
+  line-height: 1;
+}
 .lang-switch button:hover { color:#fff; border-color:rgba(255,255,255,0.5); background:rgba(255,255,255,0.08); }
 .lang-switch button.active { color:#fff; border-color:rgba(255,255,255,0.6); background:rgba(255,255,255,0.12); }
 
