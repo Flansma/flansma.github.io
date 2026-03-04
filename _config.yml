@@ -1,13 +1,25 @@
 title: "Seungeon Lee | Portfolio"
+description: "Seungeon Lee's portfolio site — AI-driven medium-sized peptide drug discovery"
 timezone: Asia/Tokyo
 url: "https://flansma.github.io"
-baseurl: "/seungeon-lee.github.io"
+baseurl: ""
 permalink: pretty
+
+# Default layout
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
 
 # Prevent macOS metadata from being processed
 exclude:
   - .DS_Store
-  - img/.DS_Store
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
 
 # Collections for itemized content
 collections:
@@ -27,6 +39,11 @@ collections:
     output: false
     sort_by: date
     order: descending
+  projects:
+    output: true
+    sort_by: date
+    order: descending
+    permalink: /projects/:name/
 
 markdown: kramdown
 theme: null

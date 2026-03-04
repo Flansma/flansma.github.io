@@ -1,46 +1,140 @@
-# Personal site (GitHub Pages + Jekyll Collections)
+# Personal Portfolio (Jekyll + GitHub Pages)
 
-이 리포는 GitHub Pages(Jekyll) 기반 개인 홈페이지입니다. 실적은 컬렉션으로 폴더/개별 파일로 관리합니다.
+A minimal academic portfolio site built with Jekyll collections. Live at [flansma.github.io](https://flansma.github.io).
 
-## Update content (실적 추가/수정)
+## Features
 
-다음 폴더에 파일을 추가하면 자동 반영됩니다. 파일명은 `YYYY-MM-DD-slug.md` 권장.
+- Single-page responsive design
+- Dark mode support (system preference + manual toggle)
+- Mobile hamburger menu
+- Multi-language support (EN/JA/KO)
+- Jekyll collections for publications, talks, awards, and projects
+- Modular layout system with includes
 
-- `_publications/` — 저널 논문(게시/게재승인/투고중)
-- `_preprints/` — 프리프린트(arXiv 등)
-- `_talks/` — 학회/세미나 발표
-- `_awards/` — 수상
+## Project Structure
 
-Front Matter 예시:
+```
+├── _includes/         # Reusable HTML components
+│   ├── head.html      # Meta tags, CSS, fonts
+│   ├── header.html    # Navigation header
+│   └── footer.html    # Page footer
+├── _layouts/          # Page templates
+│   ├── default.html   # Base layout
+│   └── project.html   # Project detail page
+├── _publications/     # Journal articles
+├── _preprints/        # Preprints (arXiv, etc.)
+├── _talks/            # Conference presentations
+├── _awards/           # Awards & honors
+├── _projects/         # Research projects (with detail pages)
+├── _data/             # YAML data files
+│   ├── bio.yml        # Biography/positions
+│   ├── experience.yml # Work experience
+│   ├── scholarships.yml
+│   └── writings.yml
+├── assets/
+│   ├── css/           # Stylesheets
+│   ├── js/            # JavaScript
+│   └── img/           # Images
+├── index.html         # Main page
+├── _config.yml        # Jekyll configuration
+├── sitemap.xml        # SEO sitemap
+└── robots.txt         # Search engine directives
+```
+
+## Adding Content
+
+### Publications / Preprints / Talks / Awards
+
+Add Markdown files to the appropriate collection folder. Filename format: `YYYY-MM-DD-slug.md`
 
 ```yaml
 ---
-title: "논문 또는 발표 제목"
+title: "Paper or Presentation Title"
 date: 2026-01-10
-venue: "학술지/학회명 등"
+venue: "Journal/Conference Name"
 authors:
   - First Author
-  - Second Author
-type: article   # article | preprint | talk | award
-# 선택 항목
-status: submitted
-doi: 10.xxxx/xxxxx    # 또는 link:
+  - Seungeon Lee
+  - Third Author
+type: article   # article | conference | preprint | talk | award
+# Optional
+status: submitted   # submitted | accepted | in press
+doi: 10.xxxx/xxxxx
 link: https://example.com
-links:
-  - label: PDF
-    url: https://...
-featured: true        # 대표 실적 카드에 노출
+featured: true      # Show in "Selected Publications"
 ---
 ```
 
-푸시 후 1–2분 내 GitHub Pages가 자동 빌드됩니다.
+### Projects
 
-## Deployment (GitHub Pages)
+Projects have their own detail pages. Add to `_projects/`:
 
-- Settings → Pages → Source: `Deploy from a branch`
-- Branch: `main` / `(root)` 선택 → 저장
+```yaml
+---
+layout: project
+title: "Project Name"
+date: 2025-01-01
+status: active   # active | completed | archived
+tags:
+  - Deep Learning
+  - NLP
+description: "Short description for the card."
+links:
+  - label: GitHub
+    url: https://github.com/...
+  - label: Paper
+    url: https://...
+featured: true
+---
 
-## Notes
+Full project description in Markdown...
+```
 
-- BibTeX: `/publications.bib`
-- .DS_Store는 `.gitignore`로 제외됨
+## Customization
+
+### Adding New Sections
+
+1. Create a new collection in `_config.yml`
+2. Add the folder (e.g., `_newcollection/`)
+3. Add the section HTML to `index.html`
+
+### Modifying Layout
+
+- Edit `_includes/header.html` for navigation
+- Edit `_layouts/default.html` for page structure
+- Edit `assets/css/style.css` for styling
+
+### Dark Mode Colors
+
+CSS variables are defined in `:root` and `[data-theme="dark"]` in `style.css`.
+
+## Deployment
+
+This site uses GitHub Actions for automatic deployment.
+
+1. Push changes to `main` branch
+2. GitHub Actions builds and deploys automatically
+3. Site updates within 1-2 minutes
+
+### Initial Setup
+
+1. Rename repository to `username.github.io`
+2. Go to **Settings** → **Pages**
+3. Set Source to **GitHub Actions**
+4. Ensure repository is **Public**
+
+## Local Development
+
+```bash
+# Install dependencies
+gem install bundler jekyll
+
+# Run locally
+bundle exec jekyll serve
+
+# Open http://localhost:4000
+```
+
+## License
+
+MIT

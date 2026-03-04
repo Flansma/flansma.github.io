@@ -1,26 +1,8 @@
 ---
----
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Seungeon Lee | Portfolio</title>
-  <meta property='og:type' content='website'>
-  <meta property='og:title' content='Seungeon Lee - Portfolio'>
-  <meta property='og:description' content='Seungeon Lee&#39;s portfolio site — AI-driven medium-sized peptide drug discovery'>
-  <meta name="theme-color" content="#0b1220">
-  <meta property="og:image" content="{{ site.baseurl }}/img/face.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <link rel="canonical" href="{{ site.url }}{{ site.baseurl }}{{ page.url }}">
-  <meta name="description" content="Seungeon Lee's portfolio site — AI-driven medium-sized peptide drug discovery" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Material+Icons+Outlined" rel="stylesheet">
-  <link href="{{ site.baseurl }}/css/style.css" media="all" rel="stylesheet" type="text/css" />
-  <script src="{{ site.baseurl }}/js/i18n.js" defer></script>
+layout: default
+title: "Seungeon Lee | Portfolio"
+description: "Seungeon Lee's portfolio site — AI-driven medium-sized peptide drug discovery"
+extra_head: |
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -40,482 +22,417 @@
     ]
   }
   </script>
-</head>
+---
 
-<body>
-  <a href="#content" class="skip-link">Skip to content</a>
-  <div class="wrapper" id="content">
-
-    <!-- header -->
-    <header class="header">
-      <div class="container">
-        <h1 class="header-logo">
-          <a href="https://clinfo.med.kyoto-u.ac.jp" class="header-link" target="_blank" rel="noopener">
-            <span class="logo-text">Okuno Lab</span>
-            <span class="logo-sub">Kyoto University</span>
-          </a>
-        </h1>
-        <nav class="gnav">
-          <ul class="gnav-list">
-            <li class="gnav-item"><a href="#about"><span data-i18n="nav.about">ABOUT</span></a></li>
-            <li class="gnav-item"><a href="#biography"><span data-i18n="nav.biography">BIOGRAPHY</span></a></li>
-            <li class="gnav-item"><a href="#bibliography"><span data-i18n="nav.bibliography">BIBLIOGRAPHY</span></a></li>
-            <li class="gnav-item"><a href="#works"><span data-i18n="nav.works">RECENT WORKS</span></a></li>
-            <li class="gnav-item"><a href="#skill"><span data-i18n="nav.skill">SKILL</span></a></li>
-            <li class="gnav-item"><a href="#contact"><span data-i18n="nav.contact">CONTACT</span></a></li>
-          </ul>
-          <div class="lang-switch">
-            <button type="button" data-lang="en" onclick="setLang('en')">English</button>
-            <button type="button" data-lang="ja" onclick="setLang('ja')">日本語</button>
-            <button type="button" data-lang="ko" onclick="setLang('ko')">한국어</button>
-          </div>
-        </nav>
-      </div>
-    </header>
-    <!-- /header -->
-
-    <main class="content">
-
-      <!-- mv -->
-      <section class="mv">
-        <div class="mv-container">
-          <p class="mv-title">SEUNGEON LEE</p>
-          <p class="mv-subtitle" data-i18n="hero.subtitle">PORTFOLIO</p>
-          <p class="mv-text" data-i18n="hero.tagline">Researching AI-driven drug discovery for medium-sized peptides, focusing on peptide language models and property prediction.</p>
-        </div>
-      </section>
-      <!-- /mv -->
-
-      <!-- about -->
-      <section class="about section" id="about">
-        <div class="container">
-          <h2 class="title" data-i18n="nav.about">ABOUT</h2>
-          <div class="profile">
-            <div class="profile-img">
-              <img src="{{ site.baseurl }}/img/face.png" alt="Seungeon Lee">
-            </div>
-            <div class="profile-body">
-              <p class="profile-affiliation">
-                <strong>LEE SEUNGEON</strong> &nbsp;/&nbsp; 李 昇彦<br>
-                Graduate School of Medicine, Kyoto University<br>
-                Big Data Medical Science, Okuno Laboratory
-              </p>
-              <p class="profile-keywords" data-i18n="about.keywords">AI Drug Discovery / Cheminformatics / Medium-sized Peptides / Machine Learning</p>
-              <p data-i18n-html="about.body">
-                I am a Master's student at the Graduate School of Medicine, Kyoto University, working in the Okuno Laboratory on AI-driven drug discovery. My current research focuses on transformer-based language models for medium-sized peptide property prediction, bridging the gap between small-molecule and protein informatics.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- /about -->
-
-      <!-- selected publications -->
-      <section class="selected section" id="selected">
-        <div class="container">
-          <h2 class="title" data-i18n="sections.selected">SELECTED PUBLICATIONS</h2>
-          {% assign featured_pub = site.publications | where: 'featured', true %}
-          {% assign featured_pre = site.preprints   | where: 'featured', true %}
-          {% assign featured = featured_pub | concat: featured_pre %}
-          {% assign featured = featured | sort: 'date' | reverse %}
-          <div class="selected-list">
-            {% for it in featured %}
-              {% assign href = '#' %}
-              {% if it.doi %}
-                {% assign href = 'https://doi.org/' | append: it.doi %}
-              {% elsif it.link %}
-                {% assign href = it.link %}
-              {% endif %}
-              <a class="selected-card" href="{{ href }}" {% if href != '#' %}target="_blank" rel="noopener"{% else %}style="pointer-events:none"{% endif %}>
-                <div class="selected-meta">
-                  <span class="selected-venue">{{ it.venue }}</span>
-                  <span class="selected-year">{{ it.date | date: "%Y" }}</span>
-                </div>
-                <div class="selected-title">{{ it.title }}</div>
-                {% if it.authors %}
-                <div class="selected-authors">{{ it.authors | join: ', ' }}</div>
-                {% endif %}
-                <div class="selected-links">
-                  {% if it.doi %}<span class="badge">DOI</span>{% endif %}
-                  {% if it.pubmed %}<span class="badge">PubMed</span>{% endif %}
-                  {% if it.pmc %}<span class="badge">PMC</span>{% endif %}
-                  {% if it.link and it.venue == 'arXiv' %}<span class="badge">arXiv</span>{% endif %}
-                </div>
-              </a>
-            {% endfor %}
-          </div>
-          <div class="selected-actions">
-            <a class="btn" href="{{ site.baseurl }}/publications.bib" download data-i18n="labels.download_bib">Download BibTeX</a>
-          </div>
-        </div>
-      </section>
-      <!-- /selected publications -->
-
-      <!-- biography -->
-      <section class="biography section" id="biography">
-        <div class="container">
-          <h2 class="title">BIOGRAPHY</h2>
-          <div class="timeline">
-            {% for b in site.data.bio.positions %}
-            <div class="timeline-item">
-              <div class="timeline-date">{{ b.period }}</div>
-              <div class="timeline-content">
-                <h3>{{ b.role }}</h3>
-                <p>{{ b.org }}{% if b.unit %}, {{ b.unit }}{% endif %}</p>
-              </div>
-            </div>
-            {% endfor %}
-          </div>
-        </div>
-      </section>
-      <!-- /biography -->
-
-      <!-- bibliography -->
-      <section class="bibliography section" id="bibliography">
-        <div class="container">
-          <h2 class="title" data-i18n="nav.bibliography">BIBLIOGRAPHY</h2>
-
-          {% assign pubs = site.publications | sort: 'date' | reverse %}
-          {% assign pres = site.preprints   | sort: 'date' | reverse %}
-          {% assign arts = pubs | where: 'type', 'article' %}
-          {% assign confs = pubs | where: 'type', 'conference' %}
-          {% assign talks = site.talks | sort: 'date' | reverse %}
-
-          {% if arts and arts.size > 0 %}
-          <h3 class="works-type"><span data-i18n="labels.articles">ARTICLES</span></h3>
-          <ol class="biblio-list">
-            {% for p in arts %}
-              {% assign href = '#' %}
-              {% if p.doi %}
-                {% assign href = 'https://doi.org/' | append: p.doi %}
-              {% elsif p.link %}
-                {% assign href = p.link %}
-              {% endif %}
-              {% assign authors_str = p.authors | join: ', ' %}
-              {% assign authors_hl = authors_str | replace: 'Seungeon Lee', '<span class="highlight-name">Seungeon Lee</span>' %}
-              <li class="biblio-item">
-                <a class="biblio-link" href="{{ href }}" {% if href != '#' %}target="_blank" rel="noopener"{% else %}style="pointer-events:none"{% endif %}>
-                  <span class="biblio-title">{{ p.title }}</span>
-                  <span class="biblio-meta">{{ authors_hl }}. ({{ p.date | date: "%Y" }}). <i>{{ p.venue }}</i>
-                    {% if p.status %}
-                      <span class="badge badge-status-{{ p.status | downcase | replace: ' ', '-' | replace: '.', '' }}">{{ p.status | upcase }}</span>
-                    {% endif %}
-                  </span>
-                </a>
-              </li>
-            {% endfor %}
-          </ol>
-          {% endif %}
-
-          {% if confs and confs.size > 0 %}
-          <h3 class="works-type"><span data-i18n="labels.conference">CONFERENCE PAPERS</span></h3>
-          <ol class="biblio-list">
-            {% for p in confs %}
-              {% assign href = p.doi | default: p.link | default: '#' %}
-              {% if p.doi %}{% assign href = 'https://doi.org/' | append: p.doi %}{% endif %}
-              {% assign authors_str = p.authors | join: ', ' %}
-              {% assign authors_hl = authors_str | replace: 'Seungeon Lee', '<span class="highlight-name">Seungeon Lee</span>' %}
-              <li class="biblio-item">
-                <a class="biblio-link" href="{{ href }}" {% if href != '#' %}target="_blank" rel="noopener"{% else %}style="pointer-events:none"{% endif %}>
-                  <span class="biblio-title">{{ p.title }}</span>
-                  <span class="biblio-meta">{{ authors_hl }}. ({{ p.date | date: "%Y" }}). <i>{{ p.venue }}</i></span>
-                </a>
-              </li>
-            {% endfor %}
-          </ol>
-          {% endif %}
-
-          {% if pres and pres.size > 0 %}
-          <h3 class="works-type"><span data-i18n="labels.preprints">PREPRINTS</span></h3>
-          <ol class="biblio-list">
-            {% for p in pres %}
-              {% assign href = p.link | default: '#' %}
-              {% assign authors_str = p.authors | join: ', ' %}
-              {% assign authors_hl = authors_str | replace: 'Seungeon Lee', '<span class="highlight-name">Seungeon Lee</span>' %}
-              <li class="biblio-item">
-                <a class="biblio-link" href="{{ href }}" {% if href != '#' %}target="_blank" rel="noopener"{% else %}style="pointer-events:none"{% endif %}>
-                  <span class="biblio-title">{{ p.title }}</span>
-                  <span class="biblio-meta">{{ authors_hl }}. ({{ p.date | date: "%Y" }}). <i>{{ p.venue }}</i>
-                    <span class="badge badge-preprint">PREPRINT</span>
-                  </span>
-                </a>
-              </li>
-            {% endfor %}
-          </ol>
-          {% endif %}
-
-          {% if talks and talks.size > 0 %}
-          <h3 class="works-type"><span data-i18n="labels.presentations">PRESENTATIONS</span></h3>
-          <ol class="biblio-list">
-            {% for t in talks %}
-              {% assign href = '#' %}
-              {% if t.links and t.links.size > 0 %}
-                {% assign href = t.links[0].url %}
-              {% endif %}
-              <li class="biblio-item">
-                <a class="biblio-link" href="{{ href }}" {% if href != '#' %}target="_blank" rel="noopener"{% else %}style="pointer-events:none"{% endif %}>
-                  <span class="biblio-title">{{ t.title }}</span>
-                  <span class="biblio-meta">{{ t.venue }}. ({{ t.date | date: "%Y" }})
-                    {% if t.format %}<span class="badge badge-{{ t.format }}">{{ t.format | upcase }}</span>{% endif %}
-                  </span>
-                </a>
-              </li>
-            {% endfor %}
-          </ol>
-          {% endif %}
-
-        </div>
-      </section>
-      <!-- /bibliography -->
-
-      {% if site.awards and site.awards.size > 0 %}
-      <!-- awards -->
-      <section class="awards section" id="awards">
-        <div class="container">
-          <h2 class="title" data-i18n="sections.awards">AWARDS</h2>
-          <ul class="section-list">
-            {% assign aws = site.awards | sort: 'date' | reverse %}
-            {% for a in aws %}
-            {% assign href = '#' %}
-            {% if a.links and a.links.size > 0 %}
-              {% assign href = a.links[0].url %}
-            {% endif %}
-            <li class="section-item">
-              <a class="section-link" href="{{ href }}" {% if href != '#' %}target="_blank" rel="noopener"{% else %}style="pointer-events:none"{% endif %}>
-                <span class="section-title">{{ a.title }}</span>
-                <span class="section-meta">{{ a.venue }} — {{ a.date | date: "%Y" }}</span>
-              </a>
-            </li>
-            {% endfor %}
-          </ul>
-        </div>
-      </section>
-      <!-- /awards -->
-      {% endif %}
-
-      {% if site.data.experience and site.data.experience.items and site.data.experience.items.size > 0 %}
-      <!-- work experience -->
-      <section class="experience section" id="experience">
-        <div class="container">
-          <h2 class="title" data-i18n="sections.experience">WORK EXPERIENCE</h2>
-          <ul class="section-list">
-            {% for e in site.data.experience.items %}
-            <li class="section-item">
-              <div class="section-title">{{ e.title }}</div>
-              <div class="section-meta">{{ e.period }}{% if e.org %} — {{ e.org }}{% endif %}</div>
-            </li>
-            {% endfor %}
-          </ul>
-        </div>
-      </section>
-      {% endif %}
-
-      {% if site.data.writings and site.data.writings.items and site.data.writings.items.size > 0 %}
-      <!-- writings -->
-      <section class="writings section" id="writings">
-        <div class="container">
-          <h2 class="title" data-i18n="sections.writings">WRITINGS</h2>
-          <ul class="section-list">
-            {% for w in site.data.writings.items %}
-            <li class="section-item">
-              <div class="section-title">{{ w.title }}</div>
-              <div class="section-meta">{{ w.venue }}{% if w.year %} — {{ w.year }}{% endif %}</div>
-            </li>
-            {% endfor %}
-          </ul>
-        </div>
-      </section>
-      {% endif %}
-
-      {% if site.data.scholarships and site.data.scholarships.items and site.data.scholarships.items.size > 0 %}
-      <!-- scholarships -->
-      <section class="scholarships section" id="scholarships">
-        <div class="container">
-          <h2 class="title" data-i18n="sections.scholarships">SCHOLARSHIPS</h2>
-          <ul class="section-list">
-            {% for s in site.data.scholarships.items %}
-            <li class="section-item">
-              <div class="section-title">{{ s.title }}</div>
-              <div class="section-meta">{{ s.period }}</div>
-            </li>
-            {% endfor %}
-          </ul>
-        </div>
-      </section>
-      {% endif %}
-
-      <!-- works -->
-      <section class="works section" id="works">
-        <div class="container">
-          <h2 class="title" data-i18n="nav.works">RECENT WORKS</h2>
-
-          {% assign items = site.publications | concat: site.preprints | concat: site.talks | concat: site.awards %}
-          {% assign items = items | sort: 'date' | reverse %}
-
-          <div class="news-feed">
-            {% for it in items %}
-              {% assign href = '#' %}
-              {% if it.doi %}
-                {% assign href = 'https://doi.org/' | append: it.doi %}
-              {% elsif it.link %}
-                {% assign href = it.link %}
-              {% elsif it.links and it.links.size > 0 %}
-                {% assign href = it.links[0].url %}
-              {% endif %}
-              {% assign type = it.type | default: 'update' %}
-              {% case type %}
-                {% when 'article' %}{% assign type_label = 'ARTICLE' %}
-                {% when 'conference' %}{% assign type_label = 'CONF PAPER' %}
-                {% when 'preprint' %}{% assign type_label = 'PREPRINT' %}
-                {% when 'talk' %}{% assign type_label = 'TALK' %}
-                {% when 'award' %}{% assign type_label = 'AWARD' %}
-                {% else %}{% assign type_label = 'UPDATE' %}
-              {% endcase %}
-              <a class="news-item" href="{{ href }}" {% if href != '#' %}target="_blank" rel="noopener"{% else %}style="pointer-events:none"{% endif %}>
-                <span class="date-badge">{{ it.date | date: "%Y.%m.%d" }}</span>
-                <span class="type-badge type-{{ type }}">{{ type_label }}</span>
-                <span class="news-title">{{ it.title }}</span>
-                {% if it.venue %}<span class="news-venue">— {{ it.venue }}</span>{% endif %}
-                {% if it.type == 'talk' and it.format %}
-                  <span class="mini-badge mini-{{ it.format }}">{{ it.format | upcase }}</span>
-                {% endif %}
-                {% if it.type == 'article' and it.status %}
-                  <span class="mini-badge">{{ it.status | upcase }}</span>
-                {% endif %}
-              </a>
-            {% endfor %}
-          </div>
-
-        </div>
-      </section>
-      <!-- /works -->
-
-      <!-- skill -->
-      <section class="skill section" id="skill">
-        <div class="container">
-          <h2 class="title" data-i18n="nav.skill">SKILL</h2>
-          <div class="skill-list">
-            <div class="skill-item">
-              <div class="skill-icon">
-                <span class="material-icons-outlined">code</span>
-              </div>
-              <div class="skill-body">
-                <h3 class="skill-name">Python</h3>
-                <p class="skill-text">
-                  Research experience with Python programming<br>
-                  Deep learning implementation with PyTorch
-                </p>
-              </div>
-            </div>
-            <div class="skill-item">
-              <div class="skill-icon">
-                <span class="material-icons-outlined">psychology</span>
-              </div>
-              <div class="skill-body">
-                <h3 class="skill-name">Machine Learning</h3>
-                <p class="skill-text">
-                  Transformer-based language models<br>
-                  Peptide property prediction & federated learning
-                </p>
-              </div>
-            </div>
-            <div class="skill-item">
-              <div class="skill-icon">
-                <span class="material-icons-outlined">language</span>
-              </div>
-              <div class="skill-body">
-                <h3 class="skill-name">English</h3>
-                <p class="skill-text">
-                  TOEIC 880
-                </p>
-              </div>
-            </div>
-            <div class="skill-item">
-              <div class="skill-icon">
-                <span class="material-icons-outlined">biotech</span>
-              </div>
-              <div class="skill-body">
-                <h3 class="skill-name">Cheminformatics</h3>
-                <p class="skill-text">
-                  HELM notation for peptide representation<br>
-                  Compound-protein interaction modeling
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- /skill -->
-
-      <!-- contact -->
-      <section class="contact section" id="contact">
-        <div class="container">
-          <h2 class="title" data-i18n="nav.contact">CONTACT</h2>
-          <p class="lead">
-            Feel free to reach out via SNS or email.
-          </p>
-          <div class="contact-list">
-            <a class="contact-item" href="https://www.linkedin.com/in/seungeon-lee-300440376/" target="_blank" rel="noopener">
-              <span class="material-icons-outlined">person</span> LinkedIn
-            </a>
-            <a class="contact-item" href="https://twitter.com/flansma" target="_blank" rel="noopener">
-              <span class="material-icons-outlined">alternate_email</span> @flansma
-            </a>
-            <span class="contact-item contact-email-item">
-              <span class="material-icons-outlined">mail</span> lee.seungeon.62y[at]st.kyoto-u.ac.jp
-            </span>
-          </div>
-        </div>
-      </section>
-      <!-- /contact -->
-
-      <div class="page-top" id="js-page-top">
-        <span class="material-icons-outlined">expand_less</span>
-      </div>
-    </main>
-
-    <!-- footer -->
-    <footer class="footer">
-      <div class="copyright">&copy; 2025 SEUNGEON LEE</div>
-    </footer>
-    <!-- /footer -->
-
+<!-- Hero -->
+<section class="mv">
+  <div class="mv-container">
+    <p class="mv-title">SEUNGEON LEE</p>
+    <p class="mv-subtitle" data-i18n="hero.subtitle">PORTFOLIO</p>
+    <p class="mv-text" data-i18n="hero.tagline">Researching AI-driven drug discovery for medium-sized peptides, focusing on peptide language models and property prediction.</p>
   </div>
+</section>
 
-  <script src="{{ site.baseurl }}/js/script.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      // Auto-number articles
-      const articleList = document.querySelectorAll('#article-list .work-item .work-title');
-      articleList.forEach((item, index) => {
-        item.innerHTML = '<span class="work-number">[' + (index + 1) + '] </span>' + item.innerHTML;
-      });
+<!-- About -->
+<section class="about section" id="about">
+  <div class="container">
+    <h2 class="title" data-i18n="nav.about">ABOUT</h2>
+    <div class="profile">
+      <div class="profile-img">
+        <img src="{{ site.baseurl }}/assets/img/face.png" alt="Seungeon Lee">
+      </div>
+      <div class="profile-body">
+        <p class="profile-affiliation">
+          <strong>LEE SEUNGEON</strong> &nbsp;/&nbsp; 李 昇彦<br>
+          Graduate School of Medicine, Kyoto University<br>
+          Big Data Medical Science, Okuno Laboratory
+        </p>
+        <p class="profile-keywords" data-i18n="about.keywords">AI Drug Discovery / Cheminformatics / Medium-sized Peptides / Machine Learning</p>
+        <p data-i18n-html="about.body">
+          I am a Master's student at the Graduate School of Medicine, Kyoto University, working in the Okuno Laboratory on AI-driven drug discovery. My current research focuses on transformer-based language models for medium-sized peptide property prediction, bridging the gap between small-molecule and protein informatics.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
 
-      // Auto-number preprints
-      const preprintList = document.querySelectorAll('#preprint-list .work-item .work-title');
-      preprintList.forEach((item, index) => {
-        item.innerHTML = '<span class="work-number">[' + (index + 1) + '] </span>' + item.innerHTML;
-      });
+<!-- Selected Publications -->
+<section class="selected section" id="selected">
+  <div class="container">
+    <h2 class="title" data-i18n="sections.selected">SELECTED PUBLICATIONS</h2>
+    {% assign featured_pub = site.publications | where: 'featured', true %}
+    {% assign featured_pre = site.preprints   | where: 'featured', true %}
+    {% assign featured = featured_pub | concat: featured_pre %}
+    {% assign featured = featured | sort: 'date' | reverse %}
+    <div class="selected-list">
+      {% for it in featured %}
+        {% assign href = '#' %}
+        {% if it.doi %}
+          {% assign href = 'https://doi.org/' | append: it.doi %}
+        {% elsif it.link %}
+          {% assign href = it.link %}
+        {% endif %}
+        <a class="selected-card" href="{{ href }}" {% if href != '#' %}target="_blank" rel="noopener"{% else %}style="pointer-events:none"{% endif %}>
+          <div class="selected-meta">
+            <span class="selected-venue">{{ it.venue }}</span>
+            <span class="selected-year">{{ it.date | date: "%Y" }}</span>
+          </div>
+          <div class="selected-title">{{ it.title }}</div>
+          {% if it.authors %}
+          <div class="selected-authors">{{ it.authors | join: ', ' }}</div>
+          {% endif %}
+          <div class="selected-links">
+            {% if it.doi %}<span class="badge">DOI</span>{% endif %}
+            {% if it.pubmed %}<span class="badge">PubMed</span>{% endif %}
+            {% if it.pmc %}<span class="badge">PMC</span>{% endif %}
+            {% if it.link and it.venue == 'arXiv' %}<span class="badge">arXiv</span>{% endif %}
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+    <div class="selected-actions">
+      <a class="btn" href="{{ site.baseurl }}/publications.bib" download data-i18n="labels.download_bib">Download BibTeX</a>
+    </div>
+  </div>
+</section>
 
-      // Auto-number presentations
-      const presentationList = document.querySelectorAll('#presentation-list .work-item .work-title');
-      presentationList.forEach((item, index) => {
-        item.innerHTML = '<span class="work-number">[' + (index + 1) + '] </span>' + item.innerHTML;
-      });
+<!-- Biography -->
+<section class="biography section" id="biography">
+  <div class="container">
+    <h2 class="title">BIOGRAPHY</h2>
+    <div class="timeline">
+      {% for b in site.data.bio.positions %}
+      <div class="timeline-item">
+        <div class="timeline-date">{{ b.period }}</div>
+        <div class="timeline-content">
+          <h3>{{ b.role }}</h3>
+          <p>{{ b.org }}{% if b.unit %}, {{ b.unit }}{% endif %}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
 
-      // Auto-number awards
-      const awardList = document.querySelectorAll('#award-list .work-item .work-title');
-      awardList.forEach((item, index) => {
-        item.innerHTML = '<span class="work-number">[' + (index + 1) + '] </span>' + item.innerHTML;
-      });
+<!-- Bibliography -->
+<section class="bibliography section" id="bibliography">
+  <div class="container">
+    <h2 class="title" data-i18n="nav.bibliography">BIBLIOGRAPHY</h2>
 
-      // Highlight "Seungeon Lee" in work-authors
-      const authorElements = document.querySelectorAll('.work-authors');
-      authorElements.forEach((element) => {
-        element.innerHTML = element.innerHTML.replace(/Seungeon Lee/g, '<span class="highlight-name">Seungeon Lee</span>');
-      });
-    });
-  </script>
-</body>
+    {% assign pubs = site.publications | sort: 'date' | reverse %}
+    {% assign pres = site.preprints   | sort: 'date' | reverse %}
+    {% assign arts = pubs | where: 'type', 'article' %}
+    {% assign confs = pubs | where: 'type', 'conference' %}
+    {% assign talks = site.talks | sort: 'date' | reverse %}
 
-</html>
+    {% if arts and arts.size > 0 %}
+    <h3 class="works-type"><span data-i18n="labels.articles">ARTICLES</span></h3>
+    <ol class="biblio-list">
+      {% for p in arts %}
+        {% assign href = '#' %}
+        {% if p.doi %}
+          {% assign href = 'https://doi.org/' | append: p.doi %}
+        {% elsif p.link %}
+          {% assign href = p.link %}
+        {% endif %}
+        {% assign authors_str = p.authors | join: ', ' %}
+        {% assign authors_hl = authors_str | replace: 'Seungeon Lee', '<span class="highlight-name">Seungeon Lee</span>' %}
+        <li class="biblio-item">
+          <a class="biblio-link" href="{{ href }}" {% if href != '#' %}target="_blank" rel="noopener"{% else %}style="pointer-events:none"{% endif %}>
+            <span class="biblio-title">{{ p.title }}</span>
+            <span class="biblio-meta">{{ authors_hl }}. ({{ p.date | date: "%Y" }}). <i>{{ p.venue }}</i>
+              {% if p.status %}
+                <span class="badge badge-status-{{ p.status | downcase | replace: ' ', '-' | replace: '.', '' }}">{{ p.status | upcase }}</span>
+              {% endif %}
+            </span>
+          </a>
+        </li>
+      {% endfor %}
+    </ol>
+    {% endif %}
+
+    {% if confs and confs.size > 0 %}
+    <h3 class="works-type"><span data-i18n="labels.conference">CONFERENCE PAPERS</span></h3>
+    <ol class="biblio-list">
+      {% for p in confs %}
+        {% assign href = p.doi | default: p.link | default: '#' %}
+        {% if p.doi %}{% assign href = 'https://doi.org/' | append: p.doi %}{% endif %}
+        {% assign authors_str = p.authors | join: ', ' %}
+        {% assign authors_hl = authors_str | replace: 'Seungeon Lee', '<span class="highlight-name">Seungeon Lee</span>' %}
+        <li class="biblio-item">
+          <a class="biblio-link" href="{{ href }}" {% if href != '#' %}target="_blank" rel="noopener"{% else %}style="pointer-events:none"{% endif %}>
+            <span class="biblio-title">{{ p.title }}</span>
+            <span class="biblio-meta">{{ authors_hl }}. ({{ p.date | date: "%Y" }}). <i>{{ p.venue }}</i></span>
+          </a>
+        </li>
+      {% endfor %}
+    </ol>
+    {% endif %}
+
+    {% if pres and pres.size > 0 %}
+    <h3 class="works-type"><span data-i18n="labels.preprints">PREPRINTS</span></h3>
+    <ol class="biblio-list">
+      {% for p in pres %}
+        {% assign href = p.link | default: '#' %}
+        {% assign authors_str = p.authors | join: ', ' %}
+        {% assign authors_hl = authors_str | replace: 'Seungeon Lee', '<span class="highlight-name">Seungeon Lee</span>' %}
+        <li class="biblio-item">
+          <a class="biblio-link" href="{{ href }}" {% if href != '#' %}target="_blank" rel="noopener"{% else %}style="pointer-events:none"{% endif %}>
+            <span class="biblio-title">{{ p.title }}</span>
+            <span class="biblio-meta">{{ authors_hl }}. ({{ p.date | date: "%Y" }}). <i>{{ p.venue }}</i>
+              <span class="badge badge-preprint">PREPRINT</span>
+            </span>
+          </a>
+        </li>
+      {% endfor %}
+    </ol>
+    {% endif %}
+
+    {% if talks and talks.size > 0 %}
+    <h3 class="works-type"><span data-i18n="labels.presentations">PRESENTATIONS</span></h3>
+    <ol class="biblio-list">
+      {% for t in talks %}
+        {% assign href = '#' %}
+        {% if t.links and t.links.size > 0 %}
+          {% assign href = t.links[0].url %}
+        {% endif %}
+        <li class="biblio-item">
+          <a class="biblio-link" href="{{ href }}" {% if href != '#' %}target="_blank" rel="noopener"{% else %}style="pointer-events:none"{% endif %}>
+            <span class="biblio-title">{{ t.title }}</span>
+            <span class="biblio-meta">{{ t.venue }}. ({{ t.date | date: "%Y" }})
+              {% if t.format %}<span class="badge badge-{{ t.format }}">{{ t.format | upcase }}</span>{% endif %}
+            </span>
+          </a>
+        </li>
+      {% endfor %}
+    </ol>
+    {% endif %}
+  </div>
+</section>
+
+{% if site.awards and site.awards.size > 0 %}
+<!-- Awards -->
+<section class="awards section" id="awards">
+  <div class="container">
+    <h2 class="title" data-i18n="sections.awards">AWARDS</h2>
+    <ul class="section-list">
+      {% assign aws = site.awards | sort: 'date' | reverse %}
+      {% for a in aws %}
+      {% assign href = '#' %}
+      {% if a.links and a.links.size > 0 %}
+        {% assign href = a.links[0].url %}
+      {% endif %}
+      <li class="section-item">
+        <a class="section-link" href="{{ href }}" {% if href != '#' %}target="_blank" rel="noopener"{% else %}style="pointer-events:none"{% endif %}>
+          <span class="section-title">{{ a.title }}</span>
+          <span class="section-meta">{{ a.venue }} — {{ a.date | date: "%Y" }}</span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}
+
+{% if site.data.experience and site.data.experience.items and site.data.experience.items.size > 0 %}
+<!-- Work Experience -->
+<section class="experience section" id="experience">
+  <div class="container">
+    <h2 class="title" data-i18n="sections.experience">WORK EXPERIENCE</h2>
+    <ul class="section-list">
+      {% for e in site.data.experience.items %}
+      <li class="section-item">
+        <div class="section-title">{{ e.title }}</div>
+        <div class="section-meta">{{ e.period }}{% if e.org %} — {{ e.org }}{% endif %}</div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}
+
+{% if site.data.writings and site.data.writings.items and site.data.writings.items.size > 0 %}
+<!-- Writings -->
+<section class="writings section" id="writings">
+  <div class="container">
+    <h2 class="title" data-i18n="sections.writings">WRITINGS</h2>
+    <ul class="section-list">
+      {% for w in site.data.writings.items %}
+      <li class="section-item">
+        <div class="section-title">{{ w.title }}</div>
+        <div class="section-meta">{{ w.venue }}{% if w.year %} — {{ w.year }}{% endif %}</div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}
+
+{% if site.data.scholarships and site.data.scholarships.items and site.data.scholarships.items.size > 0 %}
+<!-- Scholarships -->
+<section class="scholarships section" id="scholarships">
+  <div class="container">
+    <h2 class="title" data-i18n="sections.scholarships">SCHOLARSHIPS</h2>
+    <ul class="section-list">
+      {% for s in site.data.scholarships.items %}
+      <li class="section-item">
+        <div class="section-title">{{ s.title }}</div>
+        <div class="section-meta">{{ s.period }}</div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}
+
+{% if site.projects and site.projects.size > 0 %}
+<!-- Projects -->
+<section class="projects section" id="projects">
+  <div class="container">
+    <h2 class="title" data-i18n="sections.projects">PROJECTS</h2>
+    <div class="selected-list">
+      {% assign projs = site.projects | sort: 'date' | reverse %}
+      {% for p in projs %}
+      <a class="selected-card" href="{{ p.url | relative_url }}">
+        <div class="selected-meta">
+          {% if p.status %}<span class="badge badge-{{ p.status }}">{{ p.status | upcase }}</span>{% endif %}
+          <span class="selected-year">{{ p.date | date: "%Y" }}</span>
+        </div>
+        <div class="selected-title">{{ p.title }}</div>
+        {% if p.description %}
+        <div class="selected-authors">{{ p.description }}</div>
+        {% endif %}
+        {% if p.tags %}
+        <div class="selected-links">
+          {% for tag in p.tags limit:3 %}
+          <span class="badge">{{ tag }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- Recent Works -->
+<section class="works section" id="works">
+  <div class="container">
+    <h2 class="title" data-i18n="nav.works">RECENT WORKS</h2>
+
+    {% assign items = site.publications | concat: site.preprints | concat: site.talks | concat: site.awards %}
+    {% assign items = items | sort: 'date' | reverse %}
+
+    <div class="news-feed">
+      {% for it in items %}
+        {% assign href = '#' %}
+        {% if it.doi %}
+          {% assign href = 'https://doi.org/' | append: it.doi %}
+        {% elsif it.link %}
+          {% assign href = it.link %}
+        {% elsif it.links and it.links.size > 0 %}
+          {% assign href = it.links[0].url %}
+        {% endif %}
+        {% assign type = it.type | default: 'update' %}
+        {% case type %}
+          {% when 'article' %}{% assign type_label = 'ARTICLE' %}
+          {% when 'conference' %}{% assign type_label = 'CONF PAPER' %}
+          {% when 'preprint' %}{% assign type_label = 'PREPRINT' %}
+          {% when 'talk' %}{% assign type_label = 'TALK' %}
+          {% when 'award' %}{% assign type_label = 'AWARD' %}
+          {% else %}{% assign type_label = 'UPDATE' %}
+        {% endcase %}
+        <a class="news-item" href="{{ href }}" {% if href != '#' %}target="_blank" rel="noopener"{% else %}style="pointer-events:none"{% endif %}>
+          <span class="date-badge">{{ it.date | date: "%Y.%m.%d" }}</span>
+          <span class="type-badge type-{{ type }}">{{ type_label }}</span>
+          <span class="news-title">{{ it.title }}</span>
+          {% if it.venue %}<span class="news-venue">— {{ it.venue }}</span>{% endif %}
+          {% if it.type == 'talk' and it.format %}
+            <span class="mini-badge mini-{{ it.format }}">{{ it.format | upcase }}</span>
+          {% endif %}
+          {% if it.type == 'article' and it.status %}
+            <span class="mini-badge">{{ it.status | upcase }}</span>
+          {% endif %}
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Skill -->
+<section class="skill section" id="skill">
+  <div class="container">
+    <h2 class="title" data-i18n="nav.skill">SKILL</h2>
+    <div class="skill-list">
+      <div class="skill-item">
+        <div class="skill-icon">
+          <span class="material-icons-outlined">code</span>
+        </div>
+        <div class="skill-body">
+          <h3 class="skill-name">Python</h3>
+          <p class="skill-text">
+            Research experience with Python programming<br>
+            Deep learning implementation with PyTorch
+          </p>
+        </div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-icon">
+          <span class="material-icons-outlined">psychology</span>
+        </div>
+        <div class="skill-body">
+          <h3 class="skill-name">Machine Learning</h3>
+          <p class="skill-text">
+            Transformer-based language models<br>
+            Peptide property prediction & federated learning
+          </p>
+        </div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-icon">
+          <span class="material-icons-outlined">language</span>
+        </div>
+        <div class="skill-body">
+          <h3 class="skill-name">English</h3>
+          <p class="skill-text">
+            TOEIC 880
+          </p>
+        </div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-icon">
+          <span class="material-icons-outlined">biotech</span>
+        </div>
+        <div class="skill-body">
+          <h3 class="skill-name">Cheminformatics</h3>
+          <p class="skill-text">
+            HELM notation for peptide representation<br>
+            Compound-protein interaction modeling
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="contact section" id="contact">
+  <div class="container">
+    <h2 class="title" data-i18n="nav.contact">CONTACT</h2>
+    <p class="lead">
+      Feel free to reach out via SNS or email.
+    </p>
+    <div class="contact-list">
+      <a class="contact-item" href="https://www.linkedin.com/in/seungeon-lee-300440376/" target="_blank" rel="noopener">
+        <span class="material-icons-outlined">person</span> LinkedIn
+      </a>
+      <a class="contact-item" href="https://twitter.com/flansma" target="_blank" rel="noopener">
+        <span class="material-icons-outlined">alternate_email</span> @flansma
+      </a>
+      <span class="contact-item contact-email-item">
+        <span class="material-icons-outlined">mail</span> lee.seungeon.62y[at]st.kyoto-u.ac.jp
+      </span>
+    </div>
+  </div>
+</section>

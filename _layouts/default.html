@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% include head.html %}
+  {% if page.extra_head %}{{ page.extra_head }}{% endif %}
+</head>
+
+<body>
+  <a href="#content" class="skip-link">Skip to content</a>
+  <div class="wrapper" id="content">
+
+    {% include header.html %}
+
+    <main class="content">
+      {{ content }}
+    </main>
+
+    <div class="page-top" id="js-page-top">
+      <span class="material-icons-outlined">expand_less</span>
+    </div>
+
+    {% include footer.html %}
+
+  </div>
+
+  <script src="{{ site.baseurl }}/assets/js/script.js"></script>
+  {% if page.extra_js %}{{ page.extra_js }}{% endif %}
+</body>
+
+</html>
