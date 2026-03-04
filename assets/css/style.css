@@ -178,7 +178,8 @@ ul {
 
 .header-logo img {
   height: 48px;
-  width: auto;
+  width: 48px;
+  object-fit: contain;
 }
 
 .header-affiliation {
@@ -950,6 +951,7 @@ a.contact-item:hover {
 
   .header-logo img {
     height: 36px;
+    width: 36px;
   }
 
   .header-actions {
