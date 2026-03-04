@@ -1,28 +1,27 @@
 <header class="header">
   <div class="container">
-    <div class="header-brand">
-      <a href="https://clinfo.med.kyoto-u.ac.jp" class="header-logo" target="_blank" rel="noopener">
-        <img src="{{ site.baseurl }}/assets/img/E-B.png" alt="Okuno Lab" class="logo-img">
+    <h1 class="header-logo">
+      <a href="https://clinfo.med.kyoto-u.ac.jp" class="header-img" target="_blank" rel="noopener">
+        <img src="{{ site.baseurl }}/assets/img/E-B.png" alt="Okuno Lab">
       </a>
-      <div class="header-affiliation">
-        <span class="affiliation-ja">京都大学 大学院医学研究科 人間健康科学系専攻 ビッグデータ医科学分野</span>
-      </div>
-    </div>
-    <div class="header-right">
+    </h1>
+    <div class="nav-wrapper">
       <nav class="gnav" id="gnav">
         <ul class="gnav-list">
           <li class="gnav-item"><a href="#about">ABOUT</a></li>
           <li class="gnav-item"><a href="#biography">BIOGRAPHY</a></li>
           <li class="gnav-item"><a href="#bibliography">BIBLIOGRAPHY</a></li>
-          <li class="gnav-item"><a href="#works">WORKS</a></li>
+          <li class="gnav-item"><a href="#works">RECENT WORKS</a></li>
           <li class="gnav-item"><a href="#skill">SKILL</a></li>
           <li class="gnav-item"><a href="#contact">CONTACT</a></li>
         </ul>
       </nav>
       <div class="lang-switch">
-        <button type="button" data-lang="en" onclick="setLang('en')">EN</button>
-        <button type="button" data-lang="ja" onclick="setLang('ja')">JA</button>
-        <button type="button" data-lang="ko" onclick="setLang('ko')">KO</button>
+        <a href="#" data-lang="en" onclick="setLang('en'); return false;">EN</a>
+        <span class="separator">|</span>
+        <a href="#" data-lang="ja" onclick="setLang('ja'); return false;">JA</a>
+        <span class="separator">|</span>
+        <a href="#" data-lang="ko" onclick="setLang('ko'); return false;">KO</a>
       </div>
       <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
         <span class="material-icons-outlined icon-light">light_mode</span>

@@ -1,7 +1,7 @@
 // Simple client-side i18n
 window.I18N = {
   en: {
-    nav: { about: "ABOUT", biography: "BIOGRAPHY", bibliography: "BIBLIOGRAPHY", works: "WORKS", skill: "SKILL", contact: "CONTACT", awards:"AWARDS" },
+    nav: { about: "ABOUT", biography: "BIOGRAPHY", bibliography: "BIBLIOGRAPHY", works: "RECENT WORKS", skill: "SKILL", contact: "CONTACT", awards:"AWARDS" },
     sections: { selected: "SELECTED PUBLICATIONS", awards:"AWARDS", experience:"WORK EXPERIENCE", writings:"WRITINGS", scholarships:"SCHOLARSHIPS" },
     hero: { subtitle: "PORTFOLIO", tagline: "Researching AI-driven drug discovery for medium-sized peptides, focusing on peptide language models and property prediction." },
     labels: { articles: "ARTICLES", conference: "CONFERENCE PAPERS", preprints: "PREPRINTS", presentations: "PRESENTATIONS", download_bib: "Download BibTeX" },
@@ -11,7 +11,7 @@ window.I18N = {
     }
   },
   ja: {
-    nav: { about: "ABOUT", biography: "BIOGRAPHY", bibliography: "BIBLIOGRAPHY", works: "WORKS", skill: "SKILL", contact: "CONTACT", awards:"AWARDS" },
+    nav: { about: "ABOUT", biography: "BIOGRAPHY", bibliography: "BIBLIOGRAPHY", works: "RECENT WORKS", skill: "SKILL", contact: "CONTACT", awards:"AWARDS" },
     sections: { selected: "SELECTED PUBLICATIONS", awards:"AWARDS", experience:"WORK EXPERIENCE", writings:"WRITINGS", scholarships:"SCHOLARSHIPS" },
     hero: { subtitle: "PORTFOLIO", tagline: "ケモインフォマティクスを活用したAI創薬の研究、現在は中分子ペプチドのインシリコ・スクリーニング／言語モデルに関する研究に取り組んでいます。" },
     labels: { articles: "ARTICLES", conference: "CONFERENCE PAPERS", preprints: "PREPRINTS", presentations: "PRESENTATIONS", download_bib: "BibTeXをダウンロード" },
@@ -21,7 +21,7 @@ window.I18N = {
     }
   },
   ko: {
-    nav: { about: "ABOUT", biography: "BIOGRAPHY", bibliography: "BIBLIOGRAPHY", works: "WORKS", skill: "SKILL", contact: "CONTACT", awards:"AWARDS" },
+    nav: { about: "ABOUT", biography: "BIOGRAPHY", bibliography: "BIBLIOGRAPHY", works: "RECENT WORKS", skill: "SKILL", contact: "CONTACT", awards:"AWARDS" },
     sections: { selected: "SELECTED PUBLICATIONS", awards:"AWARDS", experience:"WORK EXPERIENCE", writings:"WRITINGS", scholarships:"SCHOLARSHIPS" },
     hero: { subtitle: "PORTFOLIO", tagline: "중분자 펩타이드 AI 신약개발 연구를 하고 있습니다. 특히 펩타이드 언어모델과 물성 예측에 집중합니다." },
     labels: { articles: "ARTICLES", conference: "CONFERENCE PAPERS", preprints: "PREPRINTS", presentations: "PRESENTATIONS", download_bib: "BibTeX 다운로드" },

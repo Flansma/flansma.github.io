@@ -319,7 +319,7 @@ extra_head: |
 <!-- Recent Works -->
 <section class="works section" id="works">
   <div class="container">
-    <h2 class="title" data-i18n="nav.works">WORKS</h2>
+    <h2 class="title" data-i18n="nav.works">RECENT WORKS</h2>
 
     {% assign items = site.publications | concat: site.preprints | concat: site.talks | concat: site.awards %}
     {% assign items = items | sort: 'date' | reverse %}
