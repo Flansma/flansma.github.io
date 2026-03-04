@@ -8,6 +8,7 @@ authors:
   - Ryosuke Kojima
   - Takao Otsuka
   - Aki Hasegawa
+  - Seungeon Lee
   - Hiroshi Ueda
   - Toshiharu Morimoto
   - Ryoko Sasaki
@@ -17,7 +18,6 @@ authors:
   - Teruki Honma
   - Shigeyuki Matsumoto
   - Yasushi Okuno
-  - Seungeon Lee
 type: article
 doi: 10.1186/s13321-025-01147-5
 pubmed: https://pubmed.ncbi.nlm.nih.gov/41519802/
