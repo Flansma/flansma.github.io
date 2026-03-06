@@ -10,6 +10,8 @@ links:
     url: https://cbi-society.org/taikai/taikai25/abstract_oral_list_e.html
   - label: Oral list (JP)
     url: https://cbi-society.org/taikai/taikai25/abstract_oral_list.html
+  - label: Abstract
+    url: https://cbi-society.org/taikai/taikai25/abstracts/Oral_ab/O03-02.html
   - label: PDF
     url: https://cbi-society.org/taikai/taikai25/abstracts/Orallist_2025.pdf
 ---

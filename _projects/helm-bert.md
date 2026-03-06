@@ -11,9 +11,11 @@ tags:
 description: "Transformer-based language model for medium-sized peptide property prediction using HELM notation."
 links:
   - label: Paper (arXiv)
-    url: https://arxiv.org/
+    url: https://arxiv.org/abs/2512.23175
   - label: GitHub
-    url: https://github.com/
+    url: https://github.com/clinfo/HELM-BERT
+  - label: HuggingFace
+    url: https://huggingface.co/Flansma/helm-bert
 featured: true
 ---
 

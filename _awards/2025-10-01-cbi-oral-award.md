@@ -4,7 +4,7 @@ date: 2025-10-01
 venue: "CBI Society Annual Meeting 2025"
 type: award
 links:
-  - label: Okuno Lab Research Results
-    url: https://clinfo.med.kyoto-u.ac.jp/research-results/
+  - label: CBI 2025 Award (PDF)
+    url: https://cbi-society.org/taikai/taikai25/document/award_oral_presentation.pdf
 ---
 
