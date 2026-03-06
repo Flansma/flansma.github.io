@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
       var target = document.querySelector(href === "#" || href === "" ? "html" : href);
       if (target) {
         var headerHeight = document.querySelector(".header").offsetHeight;
-        var position = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+        var position = target.getBoundingClientRect().top + window.scrollY - headerHeight;
         window.scrollTo({ top: position, behavior: "smooth" });
       }
     });
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (pageTop) {
     // Show/hide on scroll
     window.addEventListener("scroll", function () {
-      if (window.pageYOffset > 300) {
+      if (window.scrollY > 300) {
         pageTop.style.opacity = "1";
         pageTop.style.pointerEvents = "auto";
       } else {
