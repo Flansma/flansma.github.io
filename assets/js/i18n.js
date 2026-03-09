@@ -55,19 +55,23 @@ window.applyI18n = function(lang) {
     const v = getPath(dict, key);
     if (typeof v === 'string') el.innerHTML = v;
   });
-  // Swap multilingual content (data-lang-en, data-lang-ja, data-lang-ko)
+  // Swap multilingual text content (data-lang-en, data-lang-ja, data-lang-ko)
   document.querySelectorAll('[data-lang-en]').forEach(el => {
     const text = el.getAttribute('data-lang-' + lang) || el.getAttribute('data-lang-en');
     if (text) {
-      // Preserve child elements (badges) by only replacing the first text node
       const badge = el.querySelector('.badge');
       if (badge) {
         el.childNodes.forEach(n => { if (n.nodeType === 3) n.remove(); });
         el.insertBefore(document.createTextNode(text), badge);
       } else {
-        el.textContent = text;
+        el.innerHTML = text;
       }
     }
+  });
+  // Swap multilingual HTML content (data-lang-html-en, etc.)
+  document.querySelectorAll('[data-lang-html-en]').forEach(el => {
+    const html = el.getAttribute('data-lang-html-' + lang) || el.getAttribute('data-lang-html-en');
+    if (html) el.innerHTML = html;
   });
   // Update active state
   document.querySelectorAll('.lang-switch [data-lang]').forEach(btn => {
