@@ -202,6 +202,7 @@ extra_head: |
             <span class="biblio-meta">{{ t.venue }}. ({{ t.date | date: "%Y" }})
               {% if t.format %}<span class="badge badge-{{ t.format }}">{{ t.format | upcase }}</span>{% endif %}
             </span>
+            {% if t.image %}<img class="biblio-thumb" src="{{ t.image | relative_url }}" alt="{{ t.title }}">{% endif %}
           </a>
         </li>
       {% endfor %}

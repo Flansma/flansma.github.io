@@ -1233,11 +1233,16 @@ a.contact-item:hover {
 .badge-status-in-press { color:#1f2937; background:#e5e7eb; border-color:#d1d5db; }
 .badge-preprint { color:#7c2d12; background:#ffedd5; border-color:#fed7aa; }
 .badge-oral { color:#0b3b7e; background:#e6f0ff; border-color:#cfe0ff; }
+.badge-invited { color:#4a1d96; background:#ede9fe; border-color:#ddd6fe; }
 .badge-poster { color:#7a2e0e; background:#ffe8cc; border-color:#ffd8a8; }
 
 .mini-badge { font-size:10px; font-weight:700; padding:1px 5px; border-radius:5px; border:1px solid #e5e7eb; color:#4b5563; background:#f9fafb; }
 .mini-oral { color:#0b3b7e; background:#e6f0ff; border-color:#cfe0ff; }
+.mini-invited { color:#4a1d96; background:#ede9fe; border-color:#ddd6fe; }
 .mini-poster { color:#7a2e0e; background:#ffe8cc; border-color:#ffd8a8; }
+
+.biblio-thumb { width:120px; height:80px; object-fit:cover; border-radius:6px; margin-top:6px; display:block; }
+@media screen and (max-width: 767px) { .biblio-thumb { width:100px; height:66px; } }
 
 /* ================================
    Project Detail Page

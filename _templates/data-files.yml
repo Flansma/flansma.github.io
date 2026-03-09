@@ -1,0 +1,22 @@
+# ============================================
+# These 3 types are managed by editing the
+# corresponding YAML file in _data/ directly.
+# Add entries to the items: list.
+# ============================================
+
+# --- _data/experience.yml ---
+# items:
+#   - title: "Role / Position Title"
+#     period: "2025.04 – 2026.03"
+#     org: "Organization Name"
+
+# --- _data/scholarships.yml ---
+# items:
+#   - title: "Scholarship Name"
+#     period: "2024.04 – 2026.03"
+
+# --- _data/writings.yml ---
+# items:
+#   - title: "Writing Title"
+#     venue: "Publication / Platform"
+#     year: 2026
