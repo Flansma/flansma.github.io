@@ -1,6 +1,6 @@
 ---
 layout: talk
-title: "ゼロからわかるChatGPT — 病院業務におけるAI活用入門"
+title: "ゼロからわかるChatGPT — Introduction to AI in Hospital Operations"
 date: 2026-03-09
 venue: "Yokawa Hospital (吉川病院), Miki, Hyogo"
 presenter: Seungeon Lee
@@ -14,7 +14,7 @@ links:
 
 ## Overview
 
-A one-hour invited lecture for approximately 65 hospital staff members at Yokawa Hospital (医療法人社団 敬命会 吉川病院) in Miki, Hyogo. The talk introduced ChatGPT from the ground up for healthcare professionals with no prior AI experience.
+A one-hour invited lecture for approximately 60–70 hospital staff members at Yokawa Hospital (医療法人社団 敬命会 吉川病院) in Miki, Hyogo. The talk introduced ChatGPT from the ground up for healthcare professionals with no prior AI experience.
 
 ## Topics Covered
 
