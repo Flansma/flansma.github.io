@@ -194,8 +194,8 @@ extra_head: |
       {% for t in talks %}
         <li class="biblio-item">
           <a class="biblio-link" href="{{ t.url | relative_url }}">
-            <span class="biblio-title">{{ t.title }}</span>
-            <span class="biblio-meta">{{ t.venue }}. ({{ t.date | date: "%Y" }})
+            <span class="biblio-title" {% if t.title_ja or t.title_ko %}data-lang-en="{{ t.title }}" {% if t.title_ja %}data-lang-ja="{{ t.title_ja }}"{% endif %} {% if t.title_ko %}data-lang-ko="{{ t.title_ko }}"{% endif %}{% endif %}>{{ t.title }}</span>
+            <span class="biblio-meta" {% if t.venue_ja or t.venue_ko %}data-lang-en="{{ t.venue }}" {% if t.venue_ja %}data-lang-ja="{{ t.venue_ja }}"{% endif %} {% if t.venue_ko %}data-lang-ko="{{ t.venue_ko }}"{% endif %}{% endif %}>{{ t.venue }}. ({{ t.date | date: "%Y" }})
               {% if t.format %}<span class="badge badge-{{ t.format }}">{{ t.format | upcase }}</span>{% endif %}
             </span>
             {% if t.image %}<img class="biblio-thumb" src="{{ t.image | relative_url }}" alt="{{ t.title }}">{% endif %}
@@ -355,7 +355,7 @@ extra_head: |
         <a class="news-item" href="{{ href }}" {% if is_external and href != '#' %}target="_blank" rel="noopener"{% elsif href == '#' %}style="pointer-events:none"{% endif %}>
           <span class="date-badge">{{ it.date | date: "%Y.%m.%d" }}</span>
           <span class="type-badge type-{{ type }}">{{ type_label }}</span>
-          <span class="news-title">{{ it.title }}</span>
+          <span class="news-title" {% if it.title_ja or it.title_ko %}data-lang-en="{{ it.title }}" {% if it.title_ja %}data-lang-ja="{{ it.title_ja }}"{% endif %} {% if it.title_ko %}data-lang-ko="{{ it.title_ko }}"{% endif %}{% endif %}>{{ it.title }}</span>
           {% if it.venue %}<span class="news-venue">— {{ it.venue }}</span>{% endif %}
           {% if it.type == 'talk' and it.format %}
             <span class="mini-badge mini-{{ it.format }}">{{ it.format | upcase }}</span>

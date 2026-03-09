@@ -5,14 +5,14 @@ layout: default
   <div class="container">
     <a href="{{ site.baseurl }}/#bibliography" class="back-link">&larr; Back to Bibliography</a>
 
-    <h1 class="project-title">{{ page.title }}</h1>
+    <h1 class="project-title" {% if page.title_ja or page.title_ko %}data-lang-en="{{ page.title }}" {% if page.title_ja %}data-lang-ja="{{ page.title_ja }}"{% endif %} {% if page.title_ko %}data-lang-ko="{{ page.title_ko }}"{% endif %}{% endif %}>{{ page.title }}</h1>
 
     <div class="project-meta">
       <span class="project-date">{{ page.date | date: "%Y.%m.%d" }}</span>
       {% if page.format %}<span class="badge badge-{{ page.format }}">{{ page.format | upcase }}</span>{% endif %}
     </div>
 
-    <div class="talk-venue">{{ page.venue }}</div>
+    <div class="talk-venue" {% if page.venue_ja or page.venue_ko %}data-lang-en="{{ page.venue }}" {% if page.venue_ja %}data-lang-ja="{{ page.venue_ja }}"{% endif %} {% if page.venue_ko %}data-lang-ko="{{ page.venue_ko }}"{% endif %}{% endif %}>{{ page.venue }}</div>
 
     {% if page.image %}
     <div class="talk-hero">
