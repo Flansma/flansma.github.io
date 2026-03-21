@@ -14,12 +14,9 @@
     <!-- Center: Navigation -->
     <nav class="gnav" id="gnav">
       <ul class="gnav-list">
-        <li class="gnav-item"><a href="#about">ABOUT</a></li>
-        <li class="gnav-item"><a href="#biography">BIOGRAPHY</a></li>
-        <li class="gnav-item"><a href="#bibliography">BIBLIOGRAPHY</a></li>
-        <li class="gnav-item"><a href="#works">RECENT WORKS</a></li>
-        <li class="gnav-item"><a href="#skill">SKILL</a></li>
-        <li class="gnav-item"><a href="#contact">CONTACT</a></li>
+        {% for nav in site.data.navigation %}
+        <li class="gnav-item"><a href="#{{ nav.id }}">{{ nav.label }}</a></li>
+        {% endfor %}
       </ul>
       <div class="gnav-lang-switch lang-switch" role="group" aria-label="Language">
         <button type="button" data-lang="en" aria-label="English" onclick="setLang('en')">EN</button>

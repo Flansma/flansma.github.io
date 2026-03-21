@@ -1,0 +1,27 @@
+{% comment %}
+  Reusable bibliography item component.
+  Parameters (passed via include):
+    p       — the publication/preprint item
+    badge   — optional: "status" (shows p.status), "preprint" (shows PREPRINT badge), or omit for none
+{% endcomment %}
+{% assign href = '#' %}
+{% if include.p.doi %}
+  {% assign href = 'https://doi.org/' | append: include.p.doi %}
+{% elsif include.p.link %}
+  {% assign href = include.p.link %}
+{% endif %}
+{% assign authors_str = include.p.authors | join: ', ' %}
+{% assign authors_hl = authors_str | replace: 'Seungeon Lee', '<span class="highlight-name">Seungeon Lee</span>' %}
+<li class="biblio-item">
+  <a class="biblio-link" href="{{ href }}" {% if href != '#' %}target="_blank" rel="noopener"{% else %}tabindex="-1" aria-disabled="true" style="pointer-events:none"{% endif %}>
+    <span class="biblio-title">{{ include.p.title }}</span>
+    <span class="biblio-meta">{{ authors_hl }}. ({{ include.p.date | date: "%Y" }}). <i>{{ include.p.venue }}</i>
+      {% if include.badge == 'status' and include.p.status %}
+        <span class="badge badge-status-{{ include.p.status | downcase | replace: ' ', '-' | replace: '.', '' }}">{{ include.p.status | upcase }}</span>
+      {% endif %}
+      {% if include.badge == 'preprint' %}
+        <span class="badge badge-preprint">PREPRINT</span>
+      {% endif %}
+    </span>
+  </a>
+</li>

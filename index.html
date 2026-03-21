@@ -128,63 +128,21 @@ extra_head: |
     {% if arts and arts.size > 0 %}
     <h3 class="works-type"><span data-i18n="labels.articles">ARTICLES</span></h3>
     <ol class="biblio-list">
-      {% for p in arts %}
-        {% assign href = '#' %}
-        {% if p.doi %}
-          {% assign href = 'https://doi.org/' | append: p.doi %}
-        {% elsif p.link %}
-          {% assign href = p.link %}
-        {% endif %}
-        {% assign authors_str = p.authors | join: ', ' %}
-        {% assign authors_hl = authors_str | replace: 'Seungeon Lee', '<span class="highlight-name">Seungeon Lee</span>' %}
-        <li class="biblio-item">
-          <a class="biblio-link" href="{{ href }}" {% if href != '#' %}target="_blank" rel="noopener"{% else %}tabindex="-1" aria-disabled="true" style="pointer-events:none"{% endif %}>
-            <span class="biblio-title">{{ p.title }}</span>
-            <span class="biblio-meta">{{ authors_hl }}. ({{ p.date | date: "%Y" }}). <i>{{ p.venue }}</i>
-              {% if p.status %}
-                <span class="badge badge-status-{{ p.status | downcase | replace: ' ', '-' | replace: '.', '' }}">{{ p.status | upcase }}</span>
-              {% endif %}
-            </span>
-          </a>
-        </li>
-      {% endfor %}
+      {% for p in arts %}{% include biblio-item.html p=p badge="status" %}{% endfor %}
     </ol>
     {% endif %}
 
     {% if confs and confs.size > 0 %}
     <h3 class="works-type"><span data-i18n="labels.conference">CONFERENCE PAPERS</span></h3>
     <ol class="biblio-list">
-      {% for p in confs %}
-        {% assign href = p.doi | default: p.link | default: '#' %}
-        {% if p.doi %}{% assign href = 'https://doi.org/' | append: p.doi %}{% endif %}
-        {% assign authors_str = p.authors | join: ', ' %}
-        {% assign authors_hl = authors_str | replace: 'Seungeon Lee', '<span class="highlight-name">Seungeon Lee</span>' %}
-        <li class="biblio-item">
-          <a class="biblio-link" href="{{ href }}" {% if href != '#' %}target="_blank" rel="noopener"{% else %}tabindex="-1" aria-disabled="true" style="pointer-events:none"{% endif %}>
-            <span class="biblio-title">{{ p.title }}</span>
-            <span class="biblio-meta">{{ authors_hl }}. ({{ p.date | date: "%Y" }}). <i>{{ p.venue }}</i></span>
-          </a>
-        </li>
-      {% endfor %}
+      {% for p in confs %}{% include biblio-item.html p=p %}{% endfor %}
     </ol>
     {% endif %}
 
     {% if pres and pres.size > 0 %}
     <h3 class="works-type"><span data-i18n="labels.preprints">PREPRINTS</span></h3>
     <ol class="biblio-list">
-      {% for p in pres %}
-        {% assign href = p.link | default: '#' %}
-        {% assign authors_str = p.authors | join: ', ' %}
-        {% assign authors_hl = authors_str | replace: 'Seungeon Lee', '<span class="highlight-name">Seungeon Lee</span>' %}
-        <li class="biblio-item">
-          <a class="biblio-link" href="{{ href }}" {% if href != '#' %}target="_blank" rel="noopener"{% else %}tabindex="-1" aria-disabled="true" style="pointer-events:none"{% endif %}>
-            <span class="biblio-title">{{ p.title }}</span>
-            <span class="biblio-meta">{{ authors_hl }}. ({{ p.date | date: "%Y" }}). <i>{{ p.venue }}</i>
-              <span class="badge badge-preprint">PREPRINT</span>
-            </span>
-          </a>
-        </li>
-      {% endfor %}
+      {% for p in pres %}{% include biblio-item.html p=p badge="preprint" %}{% endfor %}
     </ol>
     {% endif %}
 

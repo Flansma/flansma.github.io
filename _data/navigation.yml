@@ -1,0 +1,12 @@
+- id: about
+  label: ABOUT
+- id: biography
+  label: BIOGRAPHY
+- id: bibliography
+  label: BIBLIOGRAPHY
+- id: works
+  label: RECENT WORKS
+- id: skill
+  label: SKILL
+- id: contact
+  label: CONTACT
