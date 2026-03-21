@@ -5,6 +5,10 @@ name:
 
 affiliation:
   url: "https://clinfo.med.kyoto-u.ac.jp/"
+  short:
+    en: "Kyoto University"
+    ja: "京都大学"
+    ko: "교토대학교"
   lines:
     - en: "Graduate School of Medicine, Kyoto University"
       ja: "京都大学 大学院医学研究科"
