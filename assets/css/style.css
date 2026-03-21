@@ -915,10 +915,6 @@ a.contact-item:hover {
     display: flex;
   }
 
-  .affiliation-line2 {
-    display: none;
-  }
-
   .header-brand {
     padding-right: 0;
     border-right: 0;
@@ -978,6 +974,10 @@ a.contact-item:hover {
 
   .affiliation-line1 {
     font-size: 11px;
+  }
+
+  .affiliation-line2 {
+    display: none;
   }
 
   .header-actions {
@@ -1164,7 +1164,7 @@ a.contact-item:hover {
   /* Header density on tablets */
   .header-logo img { height: 48px; width: 48px; }
   .affiliation-line1 { font-size: 12px; }
-  .affiliation-line2 { display: none; }
+  .affiliation-line2 { font-size: 11px; }
   .gnav-list { gap: 20px; }
 
   .mv-title {
