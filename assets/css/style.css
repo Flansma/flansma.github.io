@@ -176,8 +176,8 @@ ul {
 }
 
 .header-logo img {
-  height: clamp(36px, 5vw, 64px);
-  width: clamp(36px, 5vw, 64px);
+  height: 64px;
+  width: 64px;
   object-fit: contain;
 }
 
@@ -190,7 +190,7 @@ ul {
 }
 
 .affiliation-line1 {
-  font-size: clamp(11px, 1.2vw, 13px);
+  font-size: 13px;
   font-weight: 500;
   color: rgba(255,255,255,0.9);
   letter-spacing: 0.01em;
@@ -200,7 +200,7 @@ ul {
 }
 
 .affiliation-line2 {
-  font-size: clamp(10px, 1.1vw, 12px);
+  font-size: 12px;
   color: rgba(255,255,255,0.65);
   letter-spacing: 0.01em;
   white-space: nowrap;
@@ -971,6 +971,15 @@ a.contact-item:hover {
     min-width: 0;
   }
 
+  .header-logo img {
+    height: 36px;
+    width: 36px;
+  }
+
+  .affiliation-line1 {
+    font-size: 11px;
+  }
+
   .header-actions {
     gap: 6px;
   }
@@ -1153,6 +1162,8 @@ a.contact-item:hover {
    ================================ */
 @media screen and (min-width: 768px) and (max-width: 1024px) {
   /* Header density on tablets */
+  .header-logo img { height: 48px; width: 48px; }
+  .affiliation-line1 { font-size: 12px; }
   .affiliation-line2 { display: none; }
   .gnav-list { gap: 20px; }
 
