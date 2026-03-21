@@ -1,0 +1,19 @@
+{% if page.url == '/' or page.url == '/index.html' %}
+{% assign prof = site.data.profile %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "{{ prof.name.full }}",
+  "alternateName": ["{{ prof.name.kanji }}", "{{ prof.name.display }}"],
+  "affiliation": {
+    "@type": "Organization",
+    "name": "{{ prof.affiliation.lines[0].en }}, {{ prof.affiliation.lines[1].en }}",
+    "url": "{{ prof.affiliation.url }}"
+  },
+  "email": "mailto:{{ prof.email }}",
+  "jobTitle": "{{ prof.title.en }}",
+  "sameAs": [{% for s in prof.social %}"{{ s.url }}"{% unless forloop.last %}, {% endunless %}{% endfor %}]
+}
+</script>
+{% endif %}
