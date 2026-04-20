@@ -1,7 +1,7 @@
 ---
 layout: talk
 title: "HELM-BERT: A Transformer for Medium-sized Peptide Property Prediction"
-date: 2025-10-01
+date: 2025-10-29
 venue: "CBI Society Annual Meeting 2025 (Oral)"
 presenter: Seungeon Lee
 type: talk
