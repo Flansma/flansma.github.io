@@ -6,15 +6,7 @@ permalink: /feed.xml
   Combined Atom feed for talks + projects, sorted by date desc.
   Add new collections to `_collections` below to extend.
 {%- endcomment -%}
-{%- assign _collections = "talks,projects" | split: "," -%}
-{%- assign _entries = "" | split: "" -%}
-{%- for _name in _collections -%}
-  {%- assign _items = site[_name] -%}
-  {%- for _item in _items -%}
-    {%- assign _entries = _entries | push: _item -%}
-  {%- endfor -%}
-{%- endfor -%}
-{%- assign _entries = _entries | sort: "date" | reverse -%}
+{%- assign _entries = site.talks | concat: site.projects | sort: "date" | reverse -%}
 {%- assign _latest = _entries | first -%}
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
