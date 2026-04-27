@@ -1,0 +1,43 @@
+---
+layout: null
+permalink: /feed.xml
+---
+{%- comment -%}
+  Combined Atom feed for talks + projects, sorted by date desc.
+  Add new collections to `_collections` below to extend.
+{%- endcomment -%}
+{%- assign _collections = "talks,projects" | split: "," -%}
+{%- assign _entries = "" | split: "" -%}
+{%- for _name in _collections -%}
+  {%- assign _items = site[_name] -%}
+  {%- for _item in _items -%}
+    {%- assign _entries = _entries | push: _item -%}
+  {%- endfor -%}
+{%- endfor -%}
+{%- assign _entries = _entries | sort: "date" | reverse -%}
+{%- assign _latest = _entries | first -%}
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>{{ site.title }}</title>
+  <subtitle>{{ site.description }}</subtitle>
+  <link href="{{ '/feed.xml' | absolute_url }}" rel="self"/>
+  <link href="{{ '/' | absolute_url }}"/>
+  <updated>{% if _latest %}{{ _latest.date | date_to_xmlschema }}{% else %}{{ site.time | date_to_xmlschema }}{% endif %}</updated>
+  <id>{{ '/' | absolute_url }}</id>
+  <author>
+    <name>{{ site.data.profile.name.full }}</name>
+    <email>{{ site.data.profile.email }}</email>
+  </author>
+  {% for entry in _entries limit: 30 %}
+  <entry>
+    <title>{{ entry.title | xml_escape }}</title>
+    <link href="{{ entry.url | absolute_url }}"/>
+    <id>{{ entry.url | absolute_url }}</id>
+    <updated>{{ entry.date | date_to_xmlschema }}</updated>
+    <published>{{ entry.date | date_to_xmlschema }}</published>
+    <category term="{{ entry.collection }}"/>
+    {% if entry.description %}<summary>{{ entry.description | xml_escape }}</summary>{% elsif entry.venue %}<summary>{{ entry.title | xml_escape }} — {{ entry.venue | xml_escape }}</summary>{% endif %}
+    <content type="html">{{ entry.content | xml_escape }}</content>
+  </entry>
+  {% endfor %}
+</feed>
