@@ -52,7 +52,7 @@ social:
     url: "https://orcid.org/0009-0003-3232-1386"
   - platform: scholar
     label: "Google Scholar"
-    url: "https://scholar.google.com/citations?user=WJzH9dQAAAAJ&hl=en"
+    url: "https://scholar.google.com/citations?user=WJzH9dQAAAAJ"
   - platform: researchgate
     label: ResearchGate
     url: "https://www.researchgate.net/profile/Seungeon-Lee-6"
