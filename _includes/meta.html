@@ -1,0 +1,49 @@
+{% comment %}
+  Computes page-level meta variables and exposes them via assigns:
+    - page_full_title : <title> and og:title
+    - page_description : meta description / og:description / twitter:description
+    - page_og_type    : og:type (article for content, website for hub pages)
+    - page_image_url  : absolute URL for og:image / twitter:image
+    - page_lang       : html lang attribute
+    - page_canonical  : canonical URL
+
+  Resolution order for description:
+    1. page.description (front matter)
+    2. layout-specific auto-derivation (talk: "<title> — <venue> (<date>) by <presenter>")
+    3. site.description
+{% endcomment %}
+
+{%- comment -%} Title {%- endcomment -%}
+{%- if page.title and page.url != '/' and page.url != '/index.html' -%}
+  {%- assign page_full_title = page.title | append: ' | ' | append: site.title -%}
+{%- else -%}
+  {%- assign page_full_title = site.title -%}
+{%- endif -%}
+
+{%- comment -%} Description {%- endcomment -%}
+{%- if page.description and page.description != '' -%}
+  {%- assign page_description = page.description -%}
+{%- elsif page.layout == 'talk' -%}
+  {%- assign _presenter = page.presenter | default: 'Seungeon Lee' -%}
+  {%- assign _date = page.date | date: "%Y-%m-%d" -%}
+  {%- capture page_description -%}{{ page.title }} — Talk by {{ _presenter }} at {{ page.venue }} ({{ _date }}).{%- endcapture -%}
+{%- else -%}
+  {%- assign page_description = site.description -%}
+{%- endif -%}
+
+{%- comment -%} OG type {%- endcomment -%}
+{%- if page.layout == 'talk' or page.layout == 'project' -%}
+  {%- assign page_og_type = 'article' -%}
+{%- else -%}
+  {%- assign page_og_type = 'website' -%}
+{%- endif -%}
+
+{%- comment -%} Image (absolute URL) {%- endcomment -%}
+{%- assign _img = page.image | default: '/assets/img/face.png' -%}
+{%- assign page_image_url = _img | absolute_url -%}
+
+{%- comment -%} Lang {%- endcomment -%}
+{%- assign page_lang = page.lang | default: 'en' -%}
+
+{%- comment -%} Canonical {%- endcomment -%}
+{%- assign page_canonical = page.url | absolute_url -%}
