@@ -3,17 +3,27 @@
   Parameters (passed via include):
     p       — the publication/preprint item
     badge   — optional: "status" (shows p.status), "preprint" (shows PREPRINT badge), or omit for none
+
+  Link priority:
+    1. Local detail page (when collection has output:true → p.url is populated)
+    2. DOI
+    3. External link
 {% endcomment %}
 {% assign href = '#' %}
-{% if include.p.doi %}
+{% assign external = false %}
+{% if include.p.url and include.p.url != '' %}
+  {% assign href = include.p.url | relative_url %}
+{% elsif include.p.doi %}
   {% assign href = 'https://doi.org/' | append: include.p.doi %}
+  {% assign external = true %}
 {% elsif include.p.link %}
   {% assign href = include.p.link %}
+  {% assign external = true %}
 {% endif %}
 {% assign authors_str = include.p.authors | join: ', ' %}
 {% assign authors_hl = authors_str | replace: 'Seungeon Lee', '<span class="highlight-name">Seungeon Lee</span>' %}
 <li class="biblio-item">
-  <a class="biblio-link" href="{{ href }}" {% if href != '#' %}target="_blank" rel="noopener"{% else %}tabindex="-1" aria-disabled="true" style="pointer-events:none"{% endif %}>
+  <a class="biblio-link" href="{{ href }}"{% if external %} target="_blank" rel="noopener"{% endif %}{% if href == '#' %} tabindex="-1" aria-disabled="true" style="pointer-events:none"{% endif %}>
     <span class="biblio-title">{{ include.p.title }}</span>
     <span class="biblio-meta">{{ authors_hl }}. ({{ include.p.date | date: "%Y" }}). <i>{{ include.p.venue }}</i>
       {% if include.badge == 'status' and include.p.status %}
