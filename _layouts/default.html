@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-{% include meta.html %}
-<html lang="{{ page_lang }}">
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
 
 <head>
   {% include head.html %}

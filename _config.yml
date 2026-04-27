@@ -4,6 +4,32 @@ timezone: Asia/Tokyo
 url: "https://flansma.github.io"
 baseurl: ""
 permalink: pretty
+lang: en
+
+# --- jekyll-seo-tag inputs ---
+author:
+  name: "Seungeon Lee"
+  twitter: flansma
+  email: lee.seungeon.62y@st.kyoto-u.ac.jp
+twitter:
+  username: flansma
+  card: summary_large_image
+social:
+  name: "Seungeon Lee"
+  links:
+    - https://orcid.org/0009-0003-3232-1386
+    - https://scholar.google.com/citations?user=WJzH9dQAAAAJ
+    - https://www.researchgate.net/profile/Seungeon-Lee-6
+    - https://www.linkedin.com/in/seungeon-lee-300440376/
+    - https://x.com/flansma
+    - https://github.com/Flansma
+logo: /assets/img/face.png
+
+# --- Plugins (all preinstalled on GitHub Pages) ---
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-redirect-from
 
 # Default layout
 defaults:
@@ -11,6 +37,7 @@ defaults:
       path: ""
     values:
       layout: default
+      image: /assets/img/face.png
 
 # Prevent macOS metadata from being processed
 exclude:
