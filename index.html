@@ -48,12 +48,17 @@ description: "Seungeon Lee's portfolio site — AI-driven medium-sized peptide d
     <div class="selected-list">
       {% for it in featured %}
         {% assign href = '#' %}
-        {% if it.doi %}
+        {% assign is_external = false %}
+        {% if it.url and it.url != '' %}
+          {% assign href = it.url | relative_url %}
+        {% elsif it.doi %}
           {% assign href = 'https://doi.org/' | append: it.doi %}
+          {% assign is_external = true %}
         {% elsif it.link %}
           {% assign href = it.link %}
+          {% assign is_external = true %}
         {% endif %}
-        <a class="selected-card" href="{{ href }}" {% if href != '#' %}target="_blank" rel="noopener"{% else %}tabindex="-1" aria-disabled="true" style="pointer-events:none"{% endif %}>
+        <a class="selected-card" href="{{ href }}"{% if is_external %} target="_blank" rel="noopener"{% endif %}{% if href == '#' %} tabindex="-1" aria-disabled="true" style="pointer-events:none"{% endif %}>
           <div class="selected-meta">
             <span class="selected-venue">{{ it.venue }}</span>
             <span class="selected-year">{{ it.date | date: "%Y" }}</span>
@@ -271,16 +276,18 @@ description: "Seungeon Lee's portfolio site — AI-driven medium-sized peptide d
     <div class="news-feed">
       {% for it in items %}
         {% assign href = '#' %}
-        {% assign is_external = true %}
-        {% if it.type == 'talk' %}
+        {% assign is_external = false %}
+        {% if it.url and it.url != '' %}
           {% assign href = it.url | relative_url %}
-          {% assign is_external = false %}
         {% elsif it.doi %}
           {% assign href = 'https://doi.org/' | append: it.doi %}
+          {% assign is_external = true %}
         {% elsif it.link %}
           {% assign href = it.link %}
+          {% assign is_external = true %}
         {% elsif it.links and it.links.size > 0 %}
           {% assign href = it.links[0].url %}
+          {% assign is_external = true %}
         {% endif %}
         {% assign type = it.type | default: 'update' %}
         {% case type %}
