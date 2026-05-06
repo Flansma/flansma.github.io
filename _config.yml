@@ -32,7 +32,7 @@ defaults:
       path: ""
     values:
       layout: default
-      image: /assets/img/talks/cbi2025-oral.png
+      image: /assets/img/og-card.jpg
   - scope:
       path: ""
       type: talks

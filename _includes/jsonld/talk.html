@@ -1,6 +1,6 @@
 {%- assign prof = site.data.profile -%}
 {%- assign _start = page.date | date_to_xmlschema -%}
-{%- assign _img = page.image | default: '/assets/img/talks/cbi2025-oral.png' | absolute_url -%}
+{%- assign _img = page.image | default: '/assets/img/og-card.jpg' | absolute_url -%}
 {%- assign _description = page.description -%}
 {%- if _description == nil or _description == '' -%}
   {%- capture _description -%}{{ page.title }} — Talk by {{ page.presenter | default: prof.name.full }} at {{ page.venue }} ({{ page.date | date: "%Y-%m-%d" }}).{%- endcapture -%}
