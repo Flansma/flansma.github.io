@@ -212,6 +212,7 @@ description: "Seungeon Lee's portfolio site — AI-driven medium-sized peptide d
           {{ w.title }}
           {% if w.status %}<span class="badge badge-status-{{ w.status | downcase | replace: ' ', '-' | replace: '.', '' }}">{{ w.status | upcase }}</span>{% endif %}
         </div>
+        {% if w.subtitle %}<div class="section-subtitle">{{ w.subtitle }}</div>{% endif %}
         <div class="section-meta">
           {% if w.authors %}{% assign authors_str = w.authors | join: ', ' %}{{ authors_str | replace: 'Seungeon Lee', '<span class="highlight-name">Seungeon Lee</span>' }}. {% endif %}{{ w.venue }}{% if w.year %} — {{ w.year }}{% endif %}
         </div>

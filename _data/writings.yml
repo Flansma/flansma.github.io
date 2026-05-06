@@ -1,5 +1,6 @@
 items:
   - title: 低分子創薬AIにおける表現学習・相互作用理解・候補分子設計の進展
+    subtitle: Advances in Representation Learning, Interaction Understanding, and Candidate Molecule Design in AI for Small-Molecule Drug Discovery
     authors:
       - Seungeon Lee
       - Shigeyuki Matsumoto

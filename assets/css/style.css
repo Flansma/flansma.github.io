@@ -1215,6 +1215,7 @@ a.contact-item:hover {
 .section-item { border-bottom: 1px dashed var(--border-dashed); padding: 12px 0; }
 .section-link { text-decoration: none; color: inherit; display: flex; gap: 8px; align-items: baseline; }
 .section-title { font-weight: 700; color: var(--text-primary); }
+.section-subtitle { color: var(--text-secondary); font-size: 13px; font-style: italic; margin-top: 2px; }
 .section-meta { color: var(--text-muted); font-size: 13px; }
 
 .selected-card {
