@@ -17,7 +17,7 @@ Built with Jekyll on GitHub Pages with rich SEO and structured data:
 │   ├── profile.yml            # Identity: name, ORCID, affiliation, alma_mater, social
 │   ├── bio.yml                # Positions / timeline
 │   ├── navigation.yml         # Header nav
-│   ├── scholarships.yml, skills.yml, writings.yml, experience.yml
+│   ├── scholarships.yml, skills.yml, experience.yml
 ├── _includes/
 │   ├── head.html              # head with {% seo %}, citation_meta, article_meta, jsonld
 │   ├── header.html, footer.html
@@ -38,6 +38,7 @@ Built with Jekyll on GitHub Pages with rich SEO and structured data:
 ├── _talks/, _projects/        # Output:true → individual detail pages
 ├── _publications/, _preprints/  # Output:true → individual detail pages
 ├── _awards/                   # Output:false → fed into Person.award array
+├── _writings/                 # Output:false → WRITINGS section (industry magazines, commentary)
 ├── _templates/                # Scaffolds (excluded from build); copy to add new content
 ├── assets/                    # css, js, img
 ├── index.html                 # Homepage
@@ -62,6 +63,7 @@ Copy the matching template from `_templates/` into the right collection folder. 
 | Conference paper | `_publications/YYYY-MM-DD-slug.md` | `_templates/conference.md` | Same as article, listed under CONFERENCE PAPERS |
 | Preprint | `_preprints/YYYY-MM-DD-slug.md` | `_templates/preprint.md` | `ScholarlyArticle` (preprint status) with arXiv id, `citation_*`, breadcrumb, sitemap, feed |
 | Award | `_awards/YYYY-MM-DD-slug.md` | `_templates/award.md` | Appended to `Person.award[]` and homepage AWARDS section |
+| Writing (commentary, magazine, essay) | `_writings/YYYY-MM-DD-slug.md` | `_templates/writing.md` | Listed under WRITINGS section + Recent Works feed; supports `subtitle:` (English subtitle for non-English titles) and `link:` (external URL once published) |
 
 The detail page, sitemap entry, feed entry, JSON-LD, and (for academic content) Google Scholar `citation_*` meta tags are emitted automatically — no template changes required.
 

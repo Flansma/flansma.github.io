@@ -210,7 +210,7 @@ description: "Seungeon Lee's portfolio site — AI-driven medium-sized peptide d
       {% for w in writings_sorted %}
       <li class="section-item">
         <div class="section-title">
-          {{ w.title }}
+          {% if w.link %}<a class="section-title-link" href="{{ w.link }}" target="_blank" rel="noopener">{{ w.title }}</a>{% else %}{{ w.title }}{% endif %}
           {% if w.status %}<span class="badge badge-status-{{ w.status | downcase | replace: ' ', '-' | replace: '.', '' }}">{{ w.status | upcase }}</span>{% endif %}
         </div>
         {% if w.subtitle %}<div class="section-subtitle">{{ w.subtitle }}</div>{% endif %}
