@@ -1,2 +1,8 @@
-items: []
-
+items:
+  - title: 低分子創薬AIにおける表現学習・相互作用理解・候補分子設計の進展
+    authors:
+      - Seungeon Lee
+      - Shigeyuki Matsumoto
+    venue: 月刊バイオインダストリー（CMC出版）2026年7月号 特集「AI創薬の最前線」
+    year: 2026
+    status: in press

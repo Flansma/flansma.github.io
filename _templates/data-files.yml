@@ -20,3 +20,8 @@
 #   - title: "Writing Title"
 #     venue: "Publication / Platform"
 #     year: 2026
+#     # --- Optional ---
+#     # authors:
+#     #   - First Author
+#     #   - Seungeon Lee
+#     # status: in press           # submitted / in press (omit when published)
