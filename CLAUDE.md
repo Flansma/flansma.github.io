@@ -70,7 +70,7 @@ Each image file maps to exactly one role — don't reuse across roles:
 
 | File | Aspect | Role | Used by |
 |---|---|---|---|
-| `assets/img/face.jpg` | 425×425 square | Identity headshot | apple-touch-icon, ABOUT profile-img, Person.image JSON-LD |
+| `assets/img/face.jpg` | 531×531 square | Identity headshot | apple-touch-icon, ABOUT profile-img, Person.image JSON-LD |
 | `assets/img/pwa-icon-512.png` | 512×512 square | PWA install icon | `manifest.webmanifest` only |
 | `assets/img/og-card.jpg` | 1200×630 landscape | Social share card | Site-wide default `image:` (`_config.yml`), all JSON-LD content fallbacks |
 | `assets/img/favicon.svg` | vector "SL" letters | Browser tab + small icons | `<link rel="icon">` |
