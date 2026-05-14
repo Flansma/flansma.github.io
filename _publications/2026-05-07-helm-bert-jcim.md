@@ -12,7 +12,7 @@ type: article
 status: in press
 featured: true
 image: /assets/img/publications/helm-bert-architecture.png
-note: "Accepted 7 May 2026; DOI to be assigned upon publication."
+doi: 10.1021/acs.jcim.6c00451
 links:
   - label: GitHub
     url: https://github.com/clinfo/HELM-BERT
