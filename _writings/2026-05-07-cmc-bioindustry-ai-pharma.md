@@ -8,4 +8,5 @@ authors:
   - Seungeon Lee
 type: writing
 status: in press
+link: https://www.cmcbooks.co.jp/user_data/bio_nendobetsu.php
 ---

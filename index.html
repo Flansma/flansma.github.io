@@ -139,7 +139,7 @@ description: "Seungeon Lee's portfolio site — AI-driven medium-sized peptide d
         <li class="biblio-item">
           <a class="biblio-link" href="{{ t.url | relative_url }}">
             <span class="biblio-title" {% if t.title_ja or t.title_ko %}data-lang-en="{{ t.title | escape }}" {% if t.title_ja %}data-lang-ja="{{ t.title_ja | escape }}"{% endif %} {% if t.title_ko %}data-lang-ko="{{ t.title_ko | escape }}"{% endif %}{% endif %}>{{ t.title }}</span>
-            <span class="biblio-meta" {% if t.venue_ja or t.venue_ko %}data-lang-en="{{ t.venue | escape }}" {% if t.venue_ja %}data-lang-ja="{{ t.venue_ja | escape }}"{% endif %} {% if t.venue_ko %}data-lang-ko="{{ t.venue_ko | escape }}"{% endif %}{% endif %}>{{ t.venue }}. ({{ t.date | date: "%Y" }})
+            <span class="biblio-meta" {% if t.venue_ja or t.venue_ko %}data-lang-en="{{ t.venue | escape }}" {% if t.venue_ja %}data-lang-ja="{{ t.venue_ja | escape }}"{% endif %} {% if t.venue_ko %}data-lang-ko="{{ t.venue_ko | escape }}"{% endif %}{% endif %}>{{ t.venue }}. ({{ t.date | date: "%Y.%m.%d" }})
               {% if t.format %}<span class="badge badge-{{ t.format }}">{{ t.format | upcase }}</span>{% endif %}
             </span>
             {% if t.image %}<img class="biblio-thumb" src="{{ t.image | relative_url }}" alt="{{ t.title }}" loading="lazy" decoding="async">{% endif %}

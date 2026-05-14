@@ -16,6 +16,11 @@
     - "HELM notation for peptide representation"
     - "Compound-protein interaction modeling"
 
+- name: Korean
+  icon: language
+  lines:
+    - "Native speaker (mother tongue)"
+
 - name: English
   icon: language
   lines:
