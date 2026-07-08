@@ -151,96 +151,6 @@ description: "Seungeon Lee's portfolio site — AI-driven medium-sized peptide d
   </div>
 </section>
 
-{% if site.awards and site.awards.size > 0 %}
-<!-- Awards -->
-<section class="awards section" id="awards">
-  <div class="container">
-    <h2 class="title" data-i18n="sections.awards">AWARDS</h2>
-    <ul class="section-list">
-      {% assign aws = site.awards | sort: 'date' | reverse %}
-      {% for a in aws %}
-      <li class="section-item award-accordion">
-        <div class="award-header" role="button" tabindex="0" onclick="this.parentElement.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.parentElement.classList.toggle('open')}">
-          <span class="section-title">{{ a.title }}</span>
-          <span class="section-meta">{{ a.venue }} — {{ a.date | date: "%Y" }}</span>
-        </div>
-        {% if a.image or a.links %}
-        <div class="award-body">
-          {% if a.image %}<img class="award-photo" src="{{ a.image | relative_url }}" alt="{{ a.title }}" loading="lazy" decoding="async">{% endif %}
-          {% if a.links %}
-          <div class="award-links">
-            {% for link in a.links %}
-            <a href="{{ link.url }}" class="btn" target="_blank" rel="noopener">{{ link.label }}</a>
-            {% endfor %}
-          </div>
-          {% endif %}
-        </div>
-        {% endif %}
-      </li>
-      {% endfor %}
-    </ul>
-  </div>
-</section>
-{% endif %}
-
-{% if site.data.experience and site.data.experience.items and site.data.experience.items.size > 0 %}
-<!-- Work Experience -->
-<section class="experience section" id="experience">
-  <div class="container">
-    <h2 class="title" data-i18n="sections.experience">WORK EXPERIENCE</h2>
-    <ul class="section-list">
-      {% for e in site.data.experience.items %}
-      <li class="section-item">
-        <div class="section-title">{{ e.title }}</div>
-        <div class="section-meta">{{ e.period }}{% if e.org %} — {{ e.org }}{% endif %}</div>
-      </li>
-      {% endfor %}
-    </ul>
-  </div>
-</section>
-{% endif %}
-
-{% if site.writings and site.writings.size > 0 %}
-<!-- Writings -->
-<section class="writings section" id="writings">
-  <div class="container">
-    <h2 class="title" data-i18n="sections.writings">WRITINGS</h2>
-    <ul class="section-list">
-      {% assign writings_sorted = site.writings | sort: 'date' | reverse %}
-      {% for w in writings_sorted %}
-      <li class="section-item">
-        <div class="section-title">
-          {% if w.link %}<a class="section-title-link" href="{{ w.link }}" target="_blank" rel="noopener">{{ w.title }}</a>{% else %}{{ w.title }}{% endif %}
-          {% if w.status %}<span class="badge badge-status-{{ w.status | downcase | replace: ' ', '-' | replace: '.', '' }}">{{ w.status | upcase }}</span>{% endif %}
-        </div>
-        {% if w.subtitle %}<div class="section-subtitle">{{ w.subtitle }}</div>{% endif %}
-        <div class="section-meta">
-          {% if w.authors %}{% assign authors_str = w.authors | join: ', ' %}{{ authors_str | replace: 'Seungeon Lee', '<span class="highlight-name">Seungeon Lee</span>' }}. {% endif %}{{ w.venue }} — {{ w.date | date: "%Y" }}
-        </div>
-      </li>
-      {% endfor %}
-    </ul>
-  </div>
-</section>
-{% endif %}
-
-{% if site.data.scholarships and site.data.scholarships.items and site.data.scholarships.items.size > 0 %}
-<!-- Scholarships -->
-<section class="scholarships section" id="scholarships">
-  <div class="container">
-    <h2 class="title" data-i18n="sections.scholarships">SCHOLARSHIPS</h2>
-    <ul class="section-list">
-      {% for s in site.data.scholarships.items %}
-      <li class="section-item">
-        <div class="section-title">{{ s.title }}</div>
-        <div class="section-meta">{{ s.period }}</div>
-      </li>
-      {% endfor %}
-    </ul>
-  </div>
-</section>
-{% endif %}
-
 <!-- Recent Works -->
 <section class="works section" id="works">
   <div class="container">
@@ -292,6 +202,96 @@ description: "Seungeon Lee's portfolio site — AI-driven medium-sized peptide d
     </div>
   </div>
 </section>
+
+{% if site.awards and site.awards.size > 0 %}
+<!-- Awards -->
+<section class="awards section" id="awards">
+  <div class="container">
+    <h2 class="title" data-i18n="sections.awards">AWARDS</h2>
+    <ul class="section-list">
+      {% assign aws = site.awards | sort: 'date' | reverse %}
+      {% for a in aws %}
+      <li class="section-item award-accordion">
+        <div class="award-header" role="button" tabindex="0" onclick="this.parentElement.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.parentElement.classList.toggle('open')}">
+          <span class="section-title">{{ a.title }}</span>
+          <span class="section-meta">{{ a.venue }} — {{ a.date | date: "%Y" }}</span>
+        </div>
+        {% if a.image or a.links %}
+        <div class="award-body">
+          {% if a.image %}<img class="award-photo" src="{{ a.image | relative_url }}" alt="{{ a.title }}" loading="lazy" decoding="async">{% endif %}
+          {% if a.links %}
+          <div class="award-links">
+            {% for link in a.links %}
+            <a href="{{ link.url }}" class="btn" target="_blank" rel="noopener">{{ link.label }}</a>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}
+
+{% if site.data.scholarships and site.data.scholarships.items and site.data.scholarships.items.size > 0 %}
+<!-- Scholarships -->
+<section class="scholarships section" id="scholarships">
+  <div class="container">
+    <h2 class="title" data-i18n="sections.scholarships">SCHOLARSHIPS</h2>
+    <ul class="section-list">
+      {% for s in site.data.scholarships.items %}
+      <li class="section-item">
+        <div class="section-title">{{ s.title }}</div>
+        <div class="section-meta">{{ s.period }}</div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}
+
+{% if site.data.experience and site.data.experience.items and site.data.experience.items.size > 0 %}
+<!-- Work Experience -->
+<section class="experience section" id="experience">
+  <div class="container">
+    <h2 class="title" data-i18n="sections.experience">WORK EXPERIENCE</h2>
+    <ul class="section-list">
+      {% for e in site.data.experience.items %}
+      <li class="section-item">
+        <div class="section-title">{{ e.title }}</div>
+        <div class="section-meta">{{ e.period }}{% if e.org %} — {{ e.org }}{% endif %}</div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}
+
+{% if site.writings and site.writings.size > 0 %}
+<!-- Writings -->
+<section class="writings section" id="writings">
+  <div class="container">
+    <h2 class="title" data-i18n="sections.writings">WRITINGS</h2>
+    <ul class="section-list">
+      {% assign writings_sorted = site.writings | sort: 'date' | reverse %}
+      {% for w in writings_sorted %}
+      <li class="section-item">
+        <div class="section-title">
+          {% if w.link %}<a class="section-title-link" href="{{ w.link }}" target="_blank" rel="noopener">{{ w.title }}</a>{% else %}{{ w.title }}{% endif %}
+          {% if w.status %}<span class="badge badge-status-{{ w.status | downcase | replace: ' ', '-' | replace: '.', '' }}">{{ w.status | upcase }}</span>{% endif %}
+        </div>
+        {% if w.subtitle %}<div class="section-subtitle">{{ w.subtitle }}</div>{% endif %}
+        <div class="section-meta">
+          {% if w.authors %}{% assign authors_str = w.authors | join: ', ' %}{{ authors_str | replace: 'Seungeon Lee', '<span class="highlight-name">Seungeon Lee</span>' }}. {% endif %}{{ w.venue }} — {{ w.date | date: "%Y" }}
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}
 
 <!-- Skill -->
 <section class="skill section" id="skill">
