@@ -1,6 +1,6 @@
 ---
-title: "HELM-BERT: Topology-aware representations for chemically modified peptides"
-date: 2026-05-07
+title: "HELM-BERT: Topology-Aware Representations for Chemically Modified Peptides"
+date: 2026-07-15
 venue: "Journal of Chemical Information and Modeling (JCIM)"
 authors:
   - Seungeon Lee
@@ -9,7 +9,6 @@ authors:
   - Shigeyuki Matsumoto
   - Yasushi Okuno
 type: article
-status: in press
 featured: true
 image: /assets/img/publications/helm-bert-architecture.png
 doi: 10.1021/acs.jcim.6c00451
