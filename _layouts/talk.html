@@ -25,13 +25,15 @@ layout: default
     <p class="biblio-meta" lang="en">{% include authors-hl.html item=page %}.</p>
     {% endif %}
 
-    {% comment %}Hero is above the fold, so eager + high priority. width/height come
-    from front matter (`image_width`/`image_height`) because Jekyll cannot read image
-    dimensions without a plugin and GitHub Pages allows none — without them the image
-    reserves no height and the whole page below it jumps when it decodes.{% endcomment %}
-    {% if page.image and page.image != site.default_image %}
+    {% comment %}`hero:` is the in-page photo, deliberately separate from `image:` (which
+    drives og:image and is left at the site default so a shared link is not a
+    platform-cropped portrait). Above the fold, so eager + high priority. width/height
+    come from `hero_width`/`hero_height` because Jekyll cannot measure images without a
+    plugin and GitHub Pages allows none — without them the box reserves no height and
+    everything below jumps when the image decodes.{% endcomment %}
+    {% if page.hero %}
     <div class="talk-hero">
-      <img src="{{ page.image | relative_url }}" alt="{{ page.title }}"{% if page.image_width and page.image_height %} width="{{ page.image_width }}" height="{{ page.image_height }}"{% endif %} loading="eager" fetchpriority="high" decoding="async">
+      <img src="{{ page.hero | relative_url }}" alt="{{ page.title }}"{% if page.hero_width and page.hero_height %} width="{{ page.hero_width }}" height="{{ page.hero_height }}"{% endif %} loading="eager" fetchpriority="high" decoding="async">
     </div>
     {% endif %}
 

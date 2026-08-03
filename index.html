@@ -147,10 +147,10 @@ description: "Seungeon Lee's portfolio site — AI-driven medium-sized peptide d
             </span>
             {% comment %}alt="" — decorative here. It sat inside the same <a> whose first
             child is the title, so a screen reader announced every talk title twice.
-            `thumb:` is a 240x160 derivative (2x the 120x80 CSS box); the full image was
-            being shipped at full resolution into that box. Dimensions are emitted only
-            for the derivative, whose size is fixed by that convention.{% endcomment %}
-            {% if t.image and t.image != site.default_image %}<img class="biblio-thumb" src="{{ t.thumb | default: t.image | relative_url }}" alt=""{% if t.thumb %} width="240" height="160"{% endif %} loading="lazy" decoding="async">{% endif %}
+            `thumb:` is a 240x160 derivative (2x the 120x80 CSS box); the full photo was
+            being shipped at full resolution into that box. No `site.default_image` guard
+            needed — unlike `image:`, `thumb:` is never injected by _config defaults.{% endcomment %}
+            {% if t.thumb %}<img class="biblio-thumb" src="{{ t.thumb | relative_url }}" alt="" width="240" height="160" loading="lazy" decoding="async">{% endif %}
           </a>
         </li>
       {% endfor %}

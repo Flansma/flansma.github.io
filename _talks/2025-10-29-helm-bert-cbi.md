@@ -21,10 +21,12 @@ address_street: "4-1-1 Funabori"
 address_locality: "Edogawa-ku"
 address_region: "Tokyo"
 description: "Oral presentation (Award winner) at CBI 2025 introducing HELM-BERT, a transformer for medium-sized peptide property prediction using HELM notation."
-image: /assets/img/talks/cbi2025-oral.jpg
+# No `image:` — og:image falls through to the site card on purpose, so a shared
+# link is not a platform-cropped portrait photo. The full photo is the page hero.
+hero: /assets/img/talks/cbi2025-oral.jpg
+hero_width: 1568
+hero_height: 2409
 thumb: /assets/img/talks/cbi2025-oral-thumb.jpg
-image_width: 1568
-image_height: 2409
 links:
   - label: Oral list (EN)
     url: https://cbi-society.org/taikai/taikai25/abstract_oral_list_e.html

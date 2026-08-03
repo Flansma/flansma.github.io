@@ -21,10 +21,11 @@ address_locality: "Miki"
 address_region: "Hyogo"
 address_postal: "673-1231"
 description: "Invited lecture at Yokawa Hospital (Hyogo) for ~60-70 staff covering practical LLM adoption for healthcare workflows, custom GPTs, and information security."
-image: /assets/img/talks/yokawa-chatgpt-2026.jpg
+# No `image:` — see the CBI talk: og:image is left to the site card.
+hero: /assets/img/talks/yokawa-chatgpt-2026.jpg
+hero_width: 1280
+hero_height: 960
 thumb: /assets/img/talks/yokawa-chatgpt-2026-thumb.jpg
-image_width: 1280
-image_height: 960
 content_ja: |
   ## 概要
 
