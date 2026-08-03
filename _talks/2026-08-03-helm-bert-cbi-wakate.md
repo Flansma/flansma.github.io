@@ -2,6 +2,8 @@
 title: "HELM-BERT: Topology-Aware Representations for Chemically Modified Peptides"
 date: 2026-08-03
 venue: "第18回 CBI若手の会講演会 (Online, Student Talk 5)"
+venue_ja: "第18回 CBI若手の会講演会（オンライン・学生発表５）"
+venue_ko: "제18회 CBI 젊은연구자모임 강연회 (온라인·학생발표 5)"
 presenter: Seungeon Lee
 authors: "Seungeon Lee, Takuto Koyama, Itsuki Maeda, Shigeyuki Matsumoto, Yasushi Okuno"
 affiliation: "Kyoto University Graduate School of Medicine, Department of Biomedical Data Intelligence"
@@ -9,6 +11,34 @@ type: talk
 format: oral
 conference_title: "第18回 CBI若手の会講演会"
 description: "Student talk (Award winner) at the 18th CBI Wakate-no-Kai Seminar presenting the published HELM-BERT work on topology-aware representations for chemically modified peptides, followed by discussion with early-career researchers."
+content_ja: |
+  ## 概要
+
+  CBI若手の会主催の「第18回 若手の会講演会 〜越境するキャリアと研究がひらく、創薬の次世代〜」（オンライン開催、協賛：滋賀大学）にて、公募による学生発表を行いました。
+
+  発表内容は *Journal of Chemical Information and Modeling* に掲載されたHELM-BERTの論文紹介です。HELM記法で直接事前学習することでモノマーの同一性と共有結合トポロジーをそのまま表現するエンコーダ型トランスフォーマーの設計と、環状ペプチドの膜透過性予測およびペプチド−タンパク質相互作用予測における挙動について述べました。発表後は、修飾ペプチドに適した表現の選択、および記法レベルでの事前学習が有効となる条件について参加者と意見交換を行いました。
+
+  本発表は**優秀講演賞**を受賞しました。
+
+  **セッション:** 学生発表５（14:55–15:20）
+
+  **著者:** 李昇彦, 小山拓人, 前田樹, 松本篤幸, 奥野恭史
+
+  **所属:** 京都大学大学院医学研究科 ビッグデータ医科学分野
+content_ko: |
+  ## 개요
+
+  CBI若手の会(젊은연구자모임)가 주최한 「제18회 若手の会 강연회 〜越境するキャリアと研究がひらく、創薬の次世代〜」(온라인 개최, 협찬: 시가대학)에서 공모를 통한 학생발표를 진행했습니다.
+
+  발표 내용은 *Journal of Chemical Information and Modeling* 게재 논문인 HELM-BERT의 소개입니다. HELM 표기법으로 직접 사전학습하여 모노머 동일성과 공유결합 토폴로지를 그대로 표현하는 인코더형 트랜스포머의 설계, 그리고 환형 펩타이드 막투과성 예측 및 펩타이드−단백질 상호작용 예측에서의 거동을 다루었습니다. 발표 후에는 화학수식 펩타이드에 적합한 표현의 선택, 그리고 표기법 수준의 사전학습이 유효해지는 조건에 대해 참가자들과 의견을 교환했습니다.
+
+  본 발표는 **우수강연상(優秀講演賞)**을 수상했습니다.
+
+  **세션:** 学生発表５ (14:55–15:20)
+
+  **저자:** 이승언, 코야마 타쿠토, 마에다 이츠키, 마츠모토 시게유키, 오쿠노 야스시
+
+  **소속:** 교토대학 대학원 의학연구과 빅데이터 의과학 분야
 links:
   - label: Program
     url: https://sites.google.com/cbi-society.net/wakate-portal/%E7%AC%AC18%E5%9B%9Ecbi%E8%8B%A5%E6%89%8B%E3%81%AE%E4%BC%9A%E8%AC%9B%E6%BC%94%E4%BC%9A
