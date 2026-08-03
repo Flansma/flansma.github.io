@@ -7,7 +7,9 @@ venue: "Yokawa Hospital (吉川病院), Miki, Hyogo (Invited)"
 venue_ja: "吉川病院（兵庫県三木市）／招待講演"
 venue_ko: "요카와병원 (효고현 미키시) / 초청 강연"
 presenter: Seungeon Lee
-affiliation: "Kyoto University Graduate School of Medicine, Department of Biomedical Data Intelligence"
+# No `affiliation:` on purpose — this was personal outreach work, not university
+# work. Setting it would emit citation_author_institution and an Event
+# performer.affiliation, implying Kyoto University was involved in the engagement.
 type: talk
 format: invited
 attendance: offline
