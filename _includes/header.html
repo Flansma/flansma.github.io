@@ -4,7 +4,10 @@
     {% assign aff = site.data.profile.affiliation %}
     <div class="header-brand">
       <a href="{{ aff.url }}" class="header-logo" target="_blank" rel="noopener" aria-label="Okuno Laboratory website">
-        <img src="{{ '/assets/img/okuno-lab-logo-white.png' | relative_url }}" alt="Okuno Lab" width="500" height="500" loading="lazy" decoding="async">
+        {% comment %}The header is position:fixed, so this is unconditionally in the
+        first viewport — loading="lazy" was delaying an above-the-fold image. Served at
+        128px (2x the 64px slot) instead of the 500x500 original.{% endcomment %}
+        <img src="{{ '/assets/img/okuno-lab-logo-white-128.png' | relative_url }}" alt="Okuno Lab" width="128" height="128" decoding="async">
       </a>
       <div class="header-affiliation">
         {% comment %}Inline text must be the EN variant: the served HTML says
@@ -25,18 +28,18 @@
         {% endfor %}
       </ul>
       <div class="gnav-lang-switch lang-switch" role="group" aria-label="Language">
-        <button type="button" data-lang="en" aria-label="English" onclick="setLang('en')">EN</button>
-        <button type="button" data-lang="ja" aria-label="日本語" onclick="setLang('ja')">JA</button>
-        <button type="button" data-lang="ko" aria-label="한국어" onclick="setLang('ko')">KO</button>
+        <button type="button" data-lang="en" aria-label="EN — English" onclick="setLang('en')">EN</button>
+        <button type="button" data-lang="ja" aria-label="JA — 日本語" onclick="setLang('ja')">JA</button>
+        <button type="button" data-lang="ko" aria-label="KO — 한국어" onclick="setLang('ko')">KO</button>
       </div>
     </nav>
 
     <!-- Right: Lang + Theme + Menu -->
     <div class="header-actions">
       <div class="lang-switch" role="group" aria-label="Language">
-        <button type="button" data-lang="en" aria-label="English" onclick="setLang('en')">EN</button>
-        <button type="button" data-lang="ja" aria-label="日本語" onclick="setLang('ja')">JA</button>
-        <button type="button" data-lang="ko" aria-label="한국어" onclick="setLang('ko')">KO</button>
+        <button type="button" data-lang="en" aria-label="EN — English" onclick="setLang('en')">EN</button>
+        <button type="button" data-lang="ja" aria-label="JA — 日本語" onclick="setLang('ja')">JA</button>
+        <button type="button" data-lang="ko" aria-label="KO — 한국어" onclick="setLang('ko')">KO</button>
       </div>
       <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
         {% include icon.html name="light_mode" class="icon-light" %}

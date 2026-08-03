@@ -18,9 +18,12 @@
       {{ content }}
     </main>
 
-    <div class="page-top" id="js-page-top">
+    {% comment %}A real button: this was a click-only div with no role, no tabindex and
+    no accessible name, so the visible scroll-to-top control did not exist for keyboard
+    or screen-reader users.{% endcomment %}
+    <button type="button" class="page-top" id="js-page-top" aria-label="Back to top">
       {% include icon.html name="expand_less" %}
-    </div>
+    </button>
 
     {% include footer.html %}
 

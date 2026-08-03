@@ -48,21 +48,37 @@ document.addEventListener("DOMContentLoaded", function () {
   var gnav = document.getElementById("gnav");
 
   if (menuToggle && gnav) {
+    function closeDrawer() {
+      menuToggle.setAttribute("aria-expanded", "false");
+      gnav.classList.remove("is-open");
+      document.body.style.overflow = "";
+    }
+
     menuToggle.addEventListener("click", function () {
       var isOpen = menuToggle.getAttribute("aria-expanded") === "true";
-      menuToggle.setAttribute("aria-expanded", !isOpen);
-      gnav.classList.toggle("is-open", !isOpen);
-      document.body.style.overflow = !isOpen ? "hidden" : "";
+      if (isOpen) {
+        closeDrawer();
+      } else {
+        menuToggle.setAttribute("aria-expanded", "true");
+        gnav.classList.add("is-open");
+        document.body.style.overflow = "hidden";
+      }
     });
 
     // Close menu when clicking nav links
     gnav.querySelectorAll("a").forEach(function (link) {
-      link.addEventListener("click", function () {
-        menuToggle.setAttribute("aria-expanded", "false");
-        gnav.classList.remove("is-open");
-        document.body.style.overflow = "";
-      });
+      link.addEventListener("click", closeDrawer);
     });
+
+    // Leaving the mobile breakpoint with the drawer open used to strand
+    // body{overflow:hidden} — and .menu-toggle is display:none above 767px, so the
+    // only control that could release it was gone. The page stayed unscrollable.
+    var mobile = window.matchMedia("(max-width: 767px)");
+    if (typeof mobile.addEventListener === "function") {
+      mobile.addEventListener("change", function (e) {
+        if (!e.matches) closeDrawer();
+      });
+    }
   }
 
   // ================================

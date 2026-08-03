@@ -145,7 +145,12 @@ description: "Seungeon Lee's portfolio site — AI-driven medium-sized peptide d
             <span class="biblio-meta">{% include authors-hl.html item=t %}. ({{ t.date | date: "%Y.%m.%d" }}). <i><span {% if t.venue_ja or t.venue_ko %}data-lang-en="{{ t.venue | escape }}" {% if t.venue_ja %}data-lang-ja="{{ t.venue_ja | escape }}"{% endif %} {% if t.venue_ko %}data-lang-ko="{{ t.venue_ko | escape }}"{% endif %}{% endif %}>{{ t.venue }}</span></i>
               {% if t.format %}<span class="badge badge-{{ t.format }}">{{ t.format | upcase }}</span>{% endif %}
             </span>
-            {% if t.image and t.image != site.default_image %}<img class="biblio-thumb" src="{{ t.image | relative_url }}" alt="{{ t.title }}" loading="lazy" decoding="async">{% endif %}
+            {% comment %}alt="" — decorative here. It sat inside the same <a> whose first
+            child is the title, so a screen reader announced every talk title twice.
+            `thumb:` is a 240x160 derivative (2x the 120x80 CSS box); the full image was
+            being shipped at full resolution into that box. Dimensions are emitted only
+            for the derivative, whose size is fixed by that convention.{% endcomment %}
+            {% if t.image and t.image != site.default_image %}<img class="biblio-thumb" src="{{ t.thumb | default: t.image | relative_url }}" alt=""{% if t.thumb %} width="240" height="160"{% endif %} loading="lazy" decoding="async">{% endif %}
           </a>
         </li>
       {% endfor %}
@@ -215,15 +220,19 @@ description: "Seungeon Lee's portfolio site — AI-driven medium-sized peptide d
       {% assign aws = site.awards | sort: 'date' | reverse %}
       {% for a in aws %}
       <li class="section-item award-accordion">
-        <div class="award-header" role="button" tabindex="0" onclick="this.parentElement.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.parentElement.classList.toggle('open')}">
-          <span class="section-title">{{ a.title }}</span>
-          <span class="section-meta">{{ a.venue }} — {{ a.date | date: "%Y" }}</span>
-        </div>
         {% comment %}Liquid has no operator precedence, so resolve the photo test first.{% endcomment %}
         {% assign has_photo = false %}
         {% if a.image and a.image != site.default_image %}{% assign has_photo = true %}{% endif %}
+        {% comment %}A real <button> with aria-expanded/aria-controls, not a role="button"
+        div: the div announced no expanded state, and the collapsed body was only
+        max-height:0, so its links stayed in the tab order and the accessibility tree.
+        Awards with nothing to disclose render as plain text, not a dead control.{% endcomment %}
         {% if has_photo or a.links %}
-        <div class="award-body">
+        <button type="button" class="award-header" aria-expanded="false" aria-controls="award-body-{{ forloop.index }}" onclick="var li=this.closest('.award-accordion');var open=li.classList.toggle('open');this.setAttribute('aria-expanded',open)">
+          <span class="section-title">{{ a.title }}</span>
+          <span class="section-meta">{{ a.venue }} — {{ a.date | date: "%Y" }}</span>
+        </button>
+        <div class="award-body" id="award-body-{{ forloop.index }}">
           {% if has_photo %}<img class="award-photo" src="{{ a.image | relative_url }}" alt="{{ a.title }}"{% if a.image_width and a.image_height %} width="{{ a.image_width }}" height="{{ a.image_height }}"{% endif %} loading="lazy" decoding="async">{% endif %}
           {% if a.links %}
           <div class="award-links">
@@ -232,6 +241,11 @@ description: "Seungeon Lee's portfolio site — AI-driven medium-sized peptide d
             {% endfor %}
           </div>
           {% endif %}
+        </div>
+        {% else %}
+        <div class="award-header award-header-static">
+          <span class="section-title">{{ a.title }}</span>
+          <span class="section-meta">{{ a.venue }} — {{ a.date | date: "%Y" }}</span>
         </div>
         {% endif %}
       </li>

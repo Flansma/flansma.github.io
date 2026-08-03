@@ -12,6 +12,7 @@ type: article
 featured: true
 image: /assets/img/publications/helm-bert-architecture.png
 doi: 10.1021/acs.jcim.6c00451
+description: "HELM-BERT pretrains an encoder-only transformer directly on HELM notation so monomer identity and covalent topology are represented natively, reaching top mean performance on cyclic peptide membrane permeability and competitive peptide–protein interaction prediction."
 links:
   - label: GitHub
     url: https://github.com/clinfo/HELM-BERT

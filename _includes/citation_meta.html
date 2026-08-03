@@ -5,7 +5,11 @@
 
   Recognized front matter:
     title, date, venue, authors (list), affiliation, doi, arxiv_id,
-    pdf_url (or first link with .pdf), conference_title (defaults to venue)
+    pdf_url (or first SAME-ORIGIN link with .pdf), conference_title (defaults to venue)
+
+  Venue tag by layout/type: publication+article -> citation_journal_title,
+  publication+conference and talk -> citation_conference_title, preprint -> neither.
+  citation_arxiv_id is emitted on preprint pages only.
 {%- endcomment -%}
 {%- assign _is_academic = false -%}
 {%- if page.layout == 'talk' or page.layout == 'publication' or page.layout == 'preprint' -%}
@@ -26,12 +30,54 @@
     {%- assign _authors = site.data.profile.name.full | split: ', ' -%}
   {%- endif -%}
   {%- assign _date = page.date | date: "%Y/%m/%d" -%}
-  {%- assign _conf = page.conference_title | default: page.venue -%}
+  {%- comment -%}
+    Venue kind decides which tag Scholar gets. A journal article must NOT be
+    announced as citation_conference_title — that told Scholar both JCIM and
+    J. Cheminformatics were conference proceedings, and declared arXiv a conference.
+    Preprints get neither: citation_arxiv_id is the identifier that matters.
+  {%- endcomment -%}
+  {%- assign _venue_kind = 'none' -%}
+  {%- if page.layout == 'talk' -%}
+    {%- assign _venue_kind = 'conference' -%}
+  {%- elsif page.layout == 'publication' -%}
+    {%- if page.type == 'conference' -%}
+      {%- assign _venue_kind = 'conference' -%}
+    {%- else -%}
+      {%- assign _venue_kind = 'journal' -%}
+    {%- endif -%}
+  {%- endif -%}
+  {%- assign _venue_title = page.conference_title | default: page.venue -%}
+  {%- comment -%}
+    arXiv id, auto-detected from `link` the same way jsonld/preprint.html does, so the
+    preprint page does not silently ship without an identifier. Emitted on the preprint
+    page ONLY: it previously appeared on the CBI talk page (which merely presents the
+    same work) next to that talk's date, giving Scholar a contradictory record.
+  {%- endcomment -%}
+  {%- assign _arxiv_id = nil -%}
+  {%- if page.layout == 'preprint' -%}
+    {%- assign _arxiv_id = page.arxiv_id -%}
+    {%- if _arxiv_id == nil and page.link contains 'arxiv.org/abs/' -%}
+      {%- assign _arxiv_id = page.link | split: 'arxiv.org/abs/' | last | split: '?' | first -%}
+    {%- endif -%}
+  {%- endif -%}
+  {%- comment -%}
+    citation_pdf_url must be this work's own full text. An explicit pdf_url is trusted;
+    an auto-detected one must be same-origin, because `links:` legitimately holds
+    third-party documents — the CBI talk's conference programme booklet was being
+    declared as the paper's full text.
+  {%- endcomment -%}
   {%- assign _pdf = page.pdf_url -%}
   {%- if _pdf == nil and page.links -%}
     {%- for link in page.links -%}
       {%- assign _u = link.url | downcase -%}
-      {%- if _u contains '.pdf' -%}{%- assign _pdf = link.url -%}{%- break -%}{%- endif -%}
+      {%- if _u contains '.pdf' -%}
+        {%- assign _first = link.url | slice: 0 -%}
+        {%- if _first == '/' -%}
+          {%- assign _pdf = link.url -%}{%- break -%}
+        {%- elsif link.url contains site.url and site.url != '' -%}
+          {%- assign _pdf = link.url -%}{%- break -%}
+        {%- endif -%}
+      {%- endif -%}
     {%- endfor -%}
   {%- endif -%}
 <meta name="citation_title" content="{{ page.title | escape }}">
@@ -39,8 +85,10 @@
 <meta name="citation_author" content="{{ a | escape }}">
 {%- endfor %}
 <meta name="citation_publication_date" content="{{ _date }}">
-{%- if page.layout == 'talk' or page.layout == 'preprint' or _conf %}
-<meta name="citation_conference_title" content="{{ _conf | escape }}">
+{%- if _venue_kind == 'journal' and _venue_title %}
+<meta name="citation_journal_title" content="{{ _venue_title | escape }}">
+{%- elsif _venue_kind == 'conference' and _venue_title %}
+<meta name="citation_conference_title" content="{{ _venue_title | escape }}">
 {%- endif %}
 {%- if page.affiliation %}
 <meta name="citation_author_institution" content="{{ page.affiliation | escape }}">
@@ -48,8 +96,8 @@
 {%- if page.doi %}
 <meta name="citation_doi" content="{{ page.doi }}">
 {%- endif %}
-{%- if page.arxiv_id %}
-<meta name="citation_arxiv_id" content="{{ page.arxiv_id }}">
+{%- if _arxiv_id %}
+<meta name="citation_arxiv_id" content="{{ _arxiv_id }}">
 {%- endif %}
 {%- if _pdf %}
 <meta name="citation_pdf_url" content="{{ _pdf }}">

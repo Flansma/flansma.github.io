@@ -15,6 +15,21 @@ type: talk
 format: oral                  # oral / invited / poster (drives badge color)
 attendance: offline           # offline / online / mixed — drives Event.eventAttendanceMode
                               # and Place vs VirtualLocation in JSON-LD. Omit = offline.
+
+# --- Event JSON-LD: host and place. Google lists location.address as REQUIRED. ---
+organizer: "Hosting body"     # The organisation that RAN the event — never your own
+                              # affiliation. Defaults to conference_title, then venue.
+# organizer_url: https://...
+# location_name: "Venue name" # Keep the event's own title OUT of this (Google forbids it)
+# address_street: "4-1-1 Funabori"     # offline / mixed only
+# address_locality: "Edogawa-ku"
+# address_region: "Tokyo"
+# address_postal: "134-0091"
+# address_country: JP         # defaults to JP
+# event_url: https://...      # online / mixed only — VirtualLocation.url (the public
+                              # event page). Without it the VirtualLocation is unusable.
+# start_time: "14:55:00"      # optional session times, emitted with +09:00. Omit both
+# end_time: "15:20:00"        # and the Event carries a date only — never midnight.
 description: "Short summary used as meta description and social preview."
 
 # --- Optional: enables Scholar indexing & richer JSON-LD ---

@@ -12,10 +12,17 @@ authors:
 affiliation: "Kyoto University Graduate School of Medicine, Department of Biomedical Data Intelligence"
 type: talk
 format: oral
-arxiv_id: "2512.23175"
+attendance: offline
 conference_title: "CBI Society Annual Meeting 2025"
+organizer: "CBI Society (情報計算化学生物学会)"
+organizer_url: https://cbi-society.org/
+location_name: "Tower Hall Funabori (タワーホール船堀)"
+address_street: "4-1-1 Funabori"
+address_locality: "Edogawa-ku"
+address_region: "Tokyo"
 description: "Oral presentation (Award winner) at CBI 2025 introducing HELM-BERT, a transformer for medium-sized peptide property prediction using HELM notation."
 image: /assets/img/talks/cbi2025-oral.jpg
+thumb: /assets/img/talks/cbi2025-oral-thumb.jpg
 image_width: 1568
 image_height: 2409
 links:

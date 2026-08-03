@@ -38,6 +38,11 @@ defaults:
     values:
       layout: default
       image: /assets/img/og-card.jpg
+      # jekyll-seo-tag resolves the page author as page.author -> page.authors.first
+      # -> site.author. Without this default it reached authors.first, so the one
+      # paper where the site owner is NOT first author was attributed site-wide
+      # (meta author, og, and seo-tag's JSON-LD) to a co-author. Pin it.
+      author: Seungeon Lee
   - scope:
       path: ""
       type: talks
@@ -65,6 +70,10 @@ exclude:
   - vendor
   - _templates
   - _reference
+  # Figure source artwork. jekyll-sitemap indexes static files by extension
+  # allowlist (.pdf among them), so this 883 KB editable source was being
+  # advertised for indexing as if it were a document. Only the .png is published.
+  - assets/img/publications/helm-bert-architecture.pdf
 
 # Collections for itemized content
 collections:

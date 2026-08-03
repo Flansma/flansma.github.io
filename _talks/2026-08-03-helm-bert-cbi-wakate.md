@@ -16,6 +16,11 @@ type: talk
 format: oral
 attendance: online
 conference_title: "第18回 CBI若手の会講演会"
+organizer: "CBI若手の会 (CBI Society Early-Career Researchers' Association)"
+organizer_url: https://sites.google.com/cbi-society.net/wakate-portal/home
+event_url: https://sites.google.com/cbi-society.net/wakate-portal/%E7%AC%AC18%E5%9B%9Ecbi%E8%8B%A5%E6%89%8B%E3%81%AE%E4%BC%9A%E8%AC%9B%E6%BC%94%E4%BC%9A
+start_time: "14:55:00"
+end_time: "15:20:00"
 description: "Student talk (Award winner) at the 18th CBI Wakate-no-Kai Seminar presenting the published HELM-BERT work on topology-aware representations for chemically modified peptides, followed by discussion with early-career researchers."
 content_ja: |
   ## 概要

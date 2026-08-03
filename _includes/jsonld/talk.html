@@ -15,6 +15,51 @@
   {%- when 'mixed' -%}{%- assign _att_mode = 'Mixed' -%}
   {%- else -%}{%- assign _att_mode = 'Offline' -%}
 {%- endcase -%}
+{%- comment -%}
+  Event times. `date:` alone yields T00:00:00+09:00, which Google's Event docs list as
+  "Not recommended" — a midnight timestamp claims a precision the entry does not have.
+  Emit date-only unless the entry supplies real session times.
+{%- endcomment -%}
+{%- assign _d = page.date | date: '%Y-%m-%d' -%}
+{%- if page.start_time -%}
+  {%- capture _start -%}{{ _d }}T{{ page.start_time }}+09:00{%- endcapture -%}
+{%- else -%}
+  {%- assign _start = _d -%}
+{%- endif -%}
+{%- if page.end_time -%}
+  {%- capture _end -%}{{ _d }}T{{ page.end_time }}+09:00{%- endcapture -%}
+{%- else -%}
+  {%- assign _end = _start -%}
+{%- endif -%}
+{%- comment -%}
+  Google lists location.address as a Required Event property and explicitly says not to
+  put the event's own name in location.name. Both were wrong: every talk emitted a
+  location whose name was the conference title and which had no address at all.
+  Offline/mixed -> Place + PostalAddress from `location_name` / `address_*`.
+  Online -> VirtualLocation, which needs a `url` to be usable; `event_url` supplies it.
+  Mixed emits both, since a hybrid event genuinely has each.
+{%- endcomment -%}
+{%- assign _place_name = page.location_name -%}
+{%- capture _place_json -%}
+{
+      "@type": "Place",
+      "name": {{ _place_name | default: page.venue | jsonify }}{% if page.address_street or page.address_locality %},
+      "address": {
+        "@type": "PostalAddress"{% if page.address_street %},
+        "streetAddress": {{ page.address_street | jsonify }}{% endif %}{% if page.address_locality %},
+        "addressLocality": {{ page.address_locality | jsonify }}{% endif %}{% if page.address_region %},
+        "addressRegion": {{ page.address_region | jsonify }}{% endif %}{% if page.address_postal %},
+        "postalCode": {{ page.address_postal | jsonify }}{% endif %},
+        "addressCountry": {{ page.address_country | default: 'JP' | jsonify }}
+      }{% endif %}
+    }
+{%- endcapture -%}
+{%- capture _virtual_json -%}
+{
+      "@type": "VirtualLocation"{% if page.event_url %},
+      "url": {{ page.event_url | jsonify }}{% endif %}
+    }
+{%- endcapture -%}
 {%- comment -%} Build authors list from front matter {%- endcomment -%}
 {%- assign _authors = '' | split: '' -%}
 {%- if page.authors -%}
@@ -32,21 +77,29 @@
   "@type": "Event",
   "name": {{ page.title | jsonify }},
   "startDate": "{{ _start }}",
-  "endDate": "{{ _start }}",
+  "endDate": "{{ _end }}",
   "eventAttendanceMode": "https://schema.org/{{ _att_mode }}EventAttendanceMode",
   "eventStatus": "https://schema.org/EventScheduled",
-  "location": {
-    "@type": "{% if _att == 'online' %}VirtualLocation{% else %}Place{% endif %}",
-    "name": {{ page.venue | jsonify }}
-  },
+  "location": {% if _att == 'online' %}{{ _virtual_json }}{% elsif _att == 'mixed' %}[{{ _place_json }}, {{ _virtual_json }}]{% else %}{{ _place_json }}{% endif %},
   "performer": {
     "@type": "Person",
     "@id": "{{ '/#person' | absolute_url }}",
-    "name": {{ page.presenter | default: prof.name.full | jsonify }}
+    "name": {{ page.presenter | default: prof.name.full | jsonify }}{% if page.affiliation %},
+    "affiliation": {
+      "@type": "Organization",
+      "name": {{ page.affiliation | jsonify }}
+    }{% endif %}
   },
+  {%- comment -%}
+    organizer is the body that HOSTS the event, never the presenter's own institution.
+    It used to be page.affiliation, so every talk page asserted that Kyoto University
+    organised CBI Society / CBI若手の会 / hospital events. Falls back to the venue name,
+    which is at least the event's own host, not an unrelated third party.
+  {%- endcomment -%}
   "organizer": {
     "@type": "Organization",
-    "name": {{ page.affiliation | default: prof.affiliation.lines[0].en | jsonify }}
+    "name": {{ page.organizer | default: page.conference_title | default: page.venue | jsonify }}{% if page.organizer_url %},
+    "url": {{ page.organizer_url | jsonify }}{% endif %}
   },
   "image": "{{ _img }}",
   "url": "{{ page.url | absolute_url }}",

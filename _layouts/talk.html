@@ -3,7 +3,10 @@ layout: default
 ---
 <section class="talk-detail section">
   <div class="container">
-    <a href="{{ '/#bibliography' | relative_url }}" class="back-link" aria-label="Back to Bibliography" data-lang-en="&larr; Back to Bibliography" data-lang-ja="&larr; Bibliographyに戻る" data-lang-ko="&larr; Bibliography로 돌아가기">&larr; Back to Bibliography</a>
+    {% comment %}No aria-label: the link text is already the label, and a hardcoded
+    English one overrode it, so the accessible name never followed the language
+    switch (WCAG 2.5.3 Label in Name).{% endcomment %}
+    <a href="{{ '/#bibliography' | relative_url }}" class="back-link" data-lang-en="&larr; Back to Bibliography" data-lang-ja="&larr; Bibliographyに戻る" data-lang-ko="&larr; Bibliography로 돌아가기">&larr; Back to Bibliography</a>
 
     {% comment %}lang="en" only when the title never translates — otherwise the root
     lang flip would have a screen reader read an English title in a Japanese voice.{% endcomment %}

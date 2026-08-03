@@ -9,8 +9,17 @@ venue_ko: "요카와병원 (효고현 미키시) / 초청 강연"
 presenter: Seungeon Lee
 type: talk
 format: invited
+attendance: offline
+organizer: "Yokawa Hospital (医療法人社団 敬命会 吉川病院)"
+organizer_url: https://yokawa-hp.or.jp
+location_name: "Yokawa Hospital (吉川病院)"
+address_street: "1-2 Inada, Yokawa-cho"
+address_locality: "Miki"
+address_region: "Hyogo"
+address_postal: "673-1231"
 description: "Invited lecture at Yokawa Hospital (Hyogo) for ~60-70 staff covering practical LLM adoption for healthcare workflows, custom GPTs, and information security."
 image: /assets/img/talks/yokawa-chatgpt-2026.jpg
+thumb: /assets/img/talks/yokawa-chatgpt-2026-thumb.jpg
 image_width: 1280
 image_height: 960
 content_ja: |

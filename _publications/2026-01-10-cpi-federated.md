@@ -23,4 +23,5 @@ doi: 10.1186/s13321-025-01147-5
 pubmed: https://pubmed.ncbi.nlm.nih.gov/41519802/
 pmc: https://pmc.ncbi.nlm.nih.gov/articles/PMC12879444/
 featured: true
+description: "Federated learning across heterogeneous cross-pharma domains for robust compound–protein interaction prediction, evaluated on partitioned industrial datasets."
 ---
