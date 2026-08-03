@@ -142,7 +142,7 @@ description: "Seungeon Lee's portfolio site — AI-driven medium-sized peptide d
             <span class="biblio-meta" {% if t.venue_ja or t.venue_ko %}data-lang-en="{{ t.venue | escape }}" {% if t.venue_ja %}data-lang-ja="{{ t.venue_ja | escape }}"{% endif %} {% if t.venue_ko %}data-lang-ko="{{ t.venue_ko | escape }}"{% endif %}{% endif %}>{{ t.venue }}. ({{ t.date | date: "%Y.%m.%d" }})
               {% if t.format %}<span class="badge badge-{{ t.format }}">{{ t.format | upcase }}</span>{% endif %}
             </span>
-            {% if t.image %}<img class="biblio-thumb" src="{{ t.image | relative_url }}" alt="{{ t.title }}" loading="lazy" decoding="async">{% endif %}
+            {% if t.image and t.image != site.default_image %}<img class="biblio-thumb" src="{{ t.image | relative_url }}" alt="{{ t.title }}" loading="lazy" decoding="async">{% endif %}
           </a>
         </li>
       {% endfor %}
@@ -216,9 +216,12 @@ description: "Seungeon Lee's portfolio site — AI-driven medium-sized peptide d
           <span class="section-title">{{ a.title }}</span>
           <span class="section-meta">{{ a.venue }} — {{ a.date | date: "%Y" }}</span>
         </div>
-        {% if a.image or a.links %}
+        {% comment %}Liquid has no operator precedence, so resolve the photo test first.{% endcomment %}
+        {% assign has_photo = false %}
+        {% if a.image and a.image != site.default_image %}{% assign has_photo = true %}{% endif %}
+        {% if has_photo or a.links %}
         <div class="award-body">
-          {% if a.image %}<img class="award-photo" src="{{ a.image | relative_url }}" alt="{{ a.title }}" loading="lazy" decoding="async">{% endif %}
+          {% if has_photo %}<img class="award-photo" src="{{ a.image | relative_url }}" alt="{{ a.title }}" loading="lazy" decoding="async">{% endif %}
           {% if a.links %}
           <div class="award-links">
             {% for link in a.links %}

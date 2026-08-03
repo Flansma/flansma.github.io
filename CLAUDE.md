@@ -76,4 +76,6 @@ Each image file maps to exactly one role — don't reuse across roles:
 | `assets/img/favicon.svg` | vector "SL" letters | Browser tab + small icons | `<link rel="icon">` |
 | `assets/img/okuno-lab-logo-white.png` | square | Lab affiliation logo | `_includes/header.html` (header brand) |
 
+**Gotcha: omitting `image:` does not mean "no photo."** `_config.yml` `defaults` injects `image: /assets/img/og-card.jpg` on every page, so a bare `{% if page.image %}` is *always* true and the generic social card leaks in as if it were content imagery. Any in-page content `<img>` must guard with `!= site.default_image` (see `index.html` biblio-thumb / award-photo, `_layouts/talk.html` talk-hero). Do **not** "fix" this by putting `image: false` in frontmatter — that also kills the og:image social card. `site.default_image` is the single source of truth for the fallback path.
+
 Per-page `image:` frontmatter overrides the site default — use this on publication/talk pages that have their own banner (e.g., HELM-BERT publication uses `helm-bert-architecture.png` as og:image). Sub-folders under `assets/img/` (`awards/`, `talks/`, `publications/`) hold per-content images named `{event-or-id}-{role}.{ext}` (e.g., `cbi2025-oral.jpg`, `helm-bert-architecture.png`). Photos save as JPG quality ~88; diagrams/screenshots save as PNG (run `pngquant --quality=80-95 --strip` to optimize).

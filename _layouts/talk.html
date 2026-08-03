@@ -14,7 +14,7 @@ layout: default
 
     <div class="talk-venue" {% if page.venue_ja or page.venue_ko %}data-lang-en="{{ page.venue | escape }}" {% if page.venue_ja %}data-lang-ja="{{ page.venue_ja | escape }}"{% endif %} {% if page.venue_ko %}data-lang-ko="{{ page.venue_ko | escape }}"{% endif %}{% endif %}>{{ page.venue }}</div>
 
-    {% if page.image %}
+    {% if page.image and page.image != site.default_image %}
     <div class="talk-hero">
       <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" loading="lazy" decoding="async">
     </div>
