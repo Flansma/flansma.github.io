@@ -1,6 +1,9 @@
 ---
 layout: default
 description: "Seungeon Lee's portfolio site — AI-driven medium-sized peptide drug discovery"
+# The homepage's own share card. Set here, on the one page it represents, rather than
+# as a site-wide default that every publication and talk would inherit.
+image: /assets/img/og-card.jpg
 ---
 
 <!-- Hero -->
@@ -148,8 +151,7 @@ description: "Seungeon Lee's portfolio site — AI-driven medium-sized peptide d
             {% comment %}alt="" — decorative here. It sat inside the same <a> whose first
             child is the title, so a screen reader announced every talk title twice.
             `thumb:` is a 240x160 derivative (2x the 120x80 CSS box); the full photo was
-            being shipped at full resolution into that box. No `site.default_image` guard
-            needed — unlike `image:`, `thumb:` is never injected by _config defaults.{% endcomment %}
+            being shipped at full resolution into that box.{% endcomment %}
             {% if t.thumb %}<img class="biblio-thumb" src="{{ t.thumb | relative_url }}" alt="" width="240" height="160" loading="lazy" decoding="async">{% endif %}
           </a>
         </li>
@@ -222,7 +224,7 @@ description: "Seungeon Lee's portfolio site — AI-driven medium-sized peptide d
       <li class="section-item award-accordion">
         {% comment %}Liquid has no operator precedence, so resolve the photo test first.{% endcomment %}
         {% assign has_photo = false %}
-        {% if a.image and a.image != site.default_image %}{% assign has_photo = true %}{% endif %}
+        {% if a.image %}{% assign has_photo = true %}{% endif %}
         {% comment %}A real <button> with aria-expanded/aria-controls, not a role="button"
         div: the div announced no expanded state, and the collapsed body was only
         max-height:0, so its links stayed in the tab order and the accessibility tree.

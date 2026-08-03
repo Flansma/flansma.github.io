@@ -7,11 +7,6 @@ baseurl: ""
 permalink: pretty
 lang: en
 
-# Site-wide social share card. `defaults` below injects this as `image:` on every
-# page, so `{% if page.image %}` is ALWAYS true — compare against site.default_image
-# before rendering an in-page content photo, or the og-card leaks in as a thumbnail.
-default_image: /assets/img/og-card.jpg
-
 # --- jekyll-seo-tag inputs ---
 # Social links are sourced from _data/profile.yml (single source of truth).
 # Custom Person JSON-LD on the homepage emits the rich sameAs list.
@@ -37,7 +32,12 @@ defaults:
       path: ""
     values:
       layout: default
-      image: /assets/img/og-card.jpg
+      # No site-wide `image:`. A page that has its own picture sets `image:` and gets
+      # it as its og:image; a page that has none emits no og:image at all, rather than
+      # inheriting one talk's photo as the card for every publication and preprint.
+      # This also removes a whole class of bug: an injected default made
+      # `{% if page.image %}` always true, so the share card leaked into pages as if
+      # it were content imagery.
       # jekyll-seo-tag resolves the page author as page.author -> page.authors.first
       # -> site.author. Without this default it reached authors.first, so the one
       # paper where the site owner is NOT first author was attributed site-wide

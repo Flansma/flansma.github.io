@@ -66,7 +66,9 @@ To add a new content item, copy the matching scaffold from `_templates/` (exclud
 
 **Icons are inline SVG via `{% include icon.html name="…" %}`** (`_includes/icon.html`, official Material Icons Outlined geometry, Apache 2.0). The Material Icons *webfont* was removed: it cost 155 KB to draw eight glyphs and, because it loaded non-blocking with `display=swap` and the CSS never set a local `font-family`, the ligature names rendered as the literal words "light_mode"/"psychology" until it arrived. Add a glyph by adding a `when` branch, not by reintroducing the font. Likewise **CJK is served from the reader's OS fonts** (see the `body` stack in `style.css`) — `Noto Sans KR` used to be fetched on every page for ~1.9 MB of woff2 and forced Korean glyph forms onto Japanese text. Inter is requested as one variable axis (`wght@400..700`), which is why `font-weight: 500` now renders.
 
-**Three image roles, three fields — never one field doing several jobs.** Talks use `hero:` (+ `hero_width`/`hero_height`) for the full-frame photo on the page, `thumb:` for the 240×160 list crop, and leave `image:` **unset** so og:image falls through to the site card. That last part is deliberate and load-bearing: `image:` is what jekyll-seo-tag turns into og:image, and a portrait photo there gets centre-cropped by X/LinkedIn in the link preview — cutting the presenter's head off and dropping the slide title. The site card is used instead, by the owner's choice. Awards still use `image:` (they have no page, so no og:image) pointing at a `-960` derivative for the 480px accordion box; the header logo is `-128` for its 64px slot.
+**There is no site-wide share card, on purpose.** `_config.yml` `defaults` sets no `image:`, so an entry's `image:` is its *own* picture — used as the page hero and as its og:image — and a page without one emits no og:image at all. A single default would have made one talk's photo the card for every publication and preprint, with that talk's (older) title visible on the slide inside it. The homepage sets `image: /assets/img/og-card.jpg` in its own front matter, because that card represents the homepage specifically.
+
+Consequences worth knowing: `image:` is never injected, so `{% if page.image %}` means what it says and needs no `!= site.default_image` guard (that guard and the `default_image` config key are both gone). `thumb:` is a separate field for the 240×160 PRESENTATIONS crop. Awards use `image:` with a `-960` derivative for their 480px accordion box; the header logo is `-128` for its 64px slot. And note what a portrait `image:` means socially: X/LinkedIn centre-crop it to 1.91:1 in link previews, which on a podium photo cuts the top of the head off — that is a property of the photo's aspect ratio, not something the site controls.
 
 Originals stay in the repo as sources. `awards/cbi2025-award.jpg` and `okuno-lab-logo-white.png` are intentionally unreferenced — do not "clean them up". Generate derivatives with `sips --resampleWidth N`, `sips -c H W` to crop centred, or `sips -c H W --cropOffset Y X` when the centre is the wrong place to cut. Re-check the byte count afterwards: on already-compressed sources, re-encoding can make the file *bigger* (the CBI photo grew from 442 KB to 546 KB at `formatOptions 82`), so the win comes from resizing, not from quality.
 
@@ -90,19 +92,12 @@ Each image file maps to exactly one role — don't reuse across roles:
 |---|---|---|---|
 | `assets/img/face.jpg` | 531×531 square | Identity headshot | apple-touch-icon, ABOUT profile-img, Person.image JSON-LD |
 | `assets/img/pwa-icon-512.png` | 512×512 square | PWA install icon | `manifest.webmanifest` only |
-| `assets/img/og-card.jpg` | 1200×630 landscape | Social share card | Site-wide default `image:` (`_config.yml`), all JSON-LD content fallbacks |
+| `assets/img/og-card.jpg` | 1200×630 landscape | Homepage share card | `image:` in `index.html` front matter only — not a site-wide default |
 
-`og-card.jpg` is a landscape crop of `talks/cbi2025-oral.jpg`, cut so the presenter's head is intact and the slide title stays legible. It is regenerable — do not hand-crop it centred, which cuts the crown of the head off (that was the previous version):
-
-```bash
-sips -c 823 1568 --cropOffset 470 0 assets/img/talks/cbi2025-oral.jpg --out assets/img/og-card.jpg
-sips --resampleWidth 1200 assets/img/og-card.jpg --out assets/img/og-card.jpg
-```
-
-Caveat to keep in mind when it is next revisited: one talk's photo serves as the card for *every* page, so the slide visible in it names an older title than, say, the JCIM publication page it fronts. A photo-free typographic card would be page-agnostic; this is a deliberate trade for now.
+`og-card.jpg` is a landscape crop of the CBI 2025 talk photo. It fronts the homepage only. If it is ever recropped, do not cut it centred — that removes the crown of the head; `sips -c H W --cropOffset Y X` lets you choose where to cut.
 | `assets/img/favicon.svg` | vector "SL" letters | Browser tab + small icons | `<link rel="icon">` |
 | `assets/img/okuno-lab-logo-white.png` | square | Lab affiliation logo | `_includes/header.html` (header brand) |
 
-**Gotcha: omitting `image:` does not mean "no photo."** `_config.yml` `defaults` injects `image: /assets/img/og-card.jpg` on every page, so a bare `{% if page.image %}` is *always* true and the generic social card leaks in as if it were content imagery. Anything rendering `image:` as in-page content must guard with `!= site.default_image` — today that is the award photo in `index.html`. Talk heroes and list thumbnails use their own `hero:`/`thumb:` fields precisely to avoid this: those are never defaulted, so they need no guard. Do **not** "fix" the gotcha by putting `image: false` in front matter — that also kills the og:image social card. `site.default_image` is the single source of truth for the fallback path.
+**Historical note.** `_config.yml` used to inject `image:` on every page, which made `{% if page.image %}` always true and leaked the share card into pages as if it were content imagery (it appeared as a bibliography thumbnail, an award photo and a talk hero banner). The fix was removing the default, not adding guards. Do not reintroduce a site-wide `image:` default.
 
 Per-page `image:` frontmatter overrides the site default — use this on publication/talk pages that have their own banner (e.g., HELM-BERT publication uses `helm-bert-architecture.png` as og:image). Sub-folders under `assets/img/` (`awards/`, `talks/`, `publications/`) hold per-content images named `{event-or-id}-{role}.{ext}` (e.g., `cbi2025-oral.jpg`, `helm-bert-architecture.png`). Photos save as JPG quality ~88; diagrams/screenshots save as PNG (run `pngquant --quality=80-95 --strip` to optimize).

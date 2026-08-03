@@ -43,18 +43,17 @@ description: "Short summary used as meta description and social preview."
 # arxiv_id: "2512.23175"      # → citation_arxiv_id
 # doi: "10.xxxx/yyy"          # → citation_doi
 # pdf_url: https://...        # → citation_pdf_url (auto-detected from links if any link ends in .pdf)
-# --- Images: three distinct roles, do not collapse them into one field ---
-# hero: /assets/img/talks/filename.jpg    # The photo shown on this page, full frame.
-# hero_width: 1280                        # REQUIRED with hero: — intrinsic pixel size.
-# hero_height: 960                        # Jekyll can't measure images (no plugins on
+# --- Images. Omit all of these if the talk has no photo; nothing is defaulted. ---
+# image: /assets/img/talks/filename.jpg   # This entry's photo: page hero AND its og:image.
+# image_width: 1280                       # REQUIRED with image: — intrinsic pixel size.
+# image_height: 960                       # Jekyll can't measure images (no plugins on
                                           # GH Pages); without these the box reserves
                                           # no height and the page jumps on decode.
 # thumb: /assets/img/talks/filename-thumb.jpg   # 240x160 crop for the PRESENTATIONS list
 #                                               # (2x its 120x80 CSS box).
-# image:                                  # LEAVE UNSET. og:image then falls through to
-                                          # the site card. Setting it to a portrait photo
-                                          # means X/LinkedIn centre-crop it in the shared
-                                          # link preview, cutting the presenter's head off.
+                                          # Note: a portrait `image:` gets centre-cropped
+                                          # by X/LinkedIn in link previews (1.91:1), which
+                                          # on a podium shot cuts off the top of the head.
 
 # --- Multilingual (used by current JS i18n; preserved for future static i18n) ---
 # title_ja: "..."

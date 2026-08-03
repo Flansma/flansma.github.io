@@ -1,6 +1,8 @@
 {%- assign prof = site.data.profile -%}
 {%- assign _start = page.date | date_to_xmlschema -%}
-{%- assign _img = page.image | default: '/assets/img/og-card.jpg' | absolute_url -%}
+{%- comment -%} Only claim an image when the entry actually has one; there is no
+     site-wide fallback card any more. {%- endcomment -%}
+{%- if page.image -%}{%- assign _img = page.image | absolute_url -%}{%- endif -%}
 {%- assign _description = page.description -%}
 {%- if _description == nil or _description == '' -%}
   {%- capture _description -%}{{ page.title }} — Talk by {{ page.presenter | default: prof.name.full }} at {{ page.venue }} ({{ page.date | date: "%Y-%m-%d" }}).{%- endcapture -%}
@@ -101,8 +103,8 @@
     "name": {{ page.organizer | default: page.conference_title | default: page.venue | jsonify }}{% if page.organizer_url %},
     "url": {{ page.organizer_url | jsonify }}{% endif %}
   },
-  "image": "{{ _img }}",
-  "url": "{{ page.url | absolute_url }}",
+{% if _img %}  "image": "{{ _img }}",
+{% endif %}  "url": "{{ page.url | absolute_url }}",
   "description": {{ _description | jsonify }}{% if _authors.size > 0 %},
   "workPerformed": {
     "@type": "ScholarlyArticle",

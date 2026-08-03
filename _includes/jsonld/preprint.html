@@ -1,5 +1,7 @@
 {%- assign prof = site.data.profile -%}
-{%- assign _img = page.image | default: '/assets/img/og-card.jpg' | absolute_url -%}
+{%- comment -%} Only claim an image when the entry actually has one; there is no
+     site-wide fallback card any more. {%- endcomment -%}
+{%- if page.image -%}{%- assign _img = page.image | absolute_url -%}{%- endif -%}
 {%- assign _authors = '' | split: '' -%}
 {%- if page.authors -%}
   {%- if page.authors.first -%}
@@ -21,8 +23,8 @@
   "name": {{ page.title | jsonify }},
   "headline": {{ page.title | jsonify }},
   "url": "{{ page.url | absolute_url }}",
-  "image": "{{ _img }}",
-  "datePublished": "{{ page.date | date_to_xmlschema }}",
+{% if _img %}  "image": "{{ _img }}",
+{% endif %}  "datePublished": "{{ page.date | date_to_xmlschema }}",
   "inLanguage": "en",
   "creativeWorkStatus": "Preprint",
   "publishingPrinciples": "https://arxiv.org/help/general"{% if _authors.size > 0 %},
