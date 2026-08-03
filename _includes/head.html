@@ -14,20 +14,17 @@
 {% include article_meta.html %}
 
 {% comment %}
-  Fonts: Inter only, as a variable axis (wght@400..700 is one woff2, same bytes as
-  listing discrete weights, and it makes font-weight:500 real instead of silently
-  snapping to 400). CJK is served from the reader's OS fonts — see the body stack
-  in style.css. Noto Sans KR used to be requested here and cost ~1.9 MB of woff2
-  per visit; Material Icons cost 155 KB for eight glyphs and is now inline SVG
-  (_includes/icon.html). Do not reintroduce either without measuring.
+  Fonts: self-hosted Inter, declared in style.css. There is no third-party request
+  on this page at all. What used to be here: a Google Fonts stylesheet plus
+  Noto Sans KR (~1.9 MB of woff2 per visit, and it forced Korean glyph forms onto
+  Japanese text) and the Material Icons webfont (155 KB for eight glyphs, now
+  inline SVG in _includes/icon.html). CJK comes from the reader's OS fonts.
+
+  `crossorigin` is required on a font preload even same-origin: fonts are always
+  fetched in CORS mode, and without it the browser downloads the file twice.
 {% endcomment %}
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="{{ '/assets/fonts/inter-var-latin.woff2' | relative_url }}" crossorigin>
 <link rel="preload" as="image" href="{{ '/assets/img/face.jpg' | relative_url }}">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&display=swap" media="print" onload="this.media='all'">
-<noscript>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&display=swap">
-</noscript>
 {% comment %}
   Theme + JS bootstrap. Must run before the stylesheet so the first paint already
   carries the right palette: script.js only runs at DOMContentLoaded, which made
