@@ -13,12 +13,16 @@ type: talk
 
 # --- Recommended ---
 format: oral                  # oral / invited / poster (drives badge color)
+attendance: offline           # offline / online / mixed — drives Event.eventAttendanceMode
+                              # and Place vs VirtualLocation in JSON-LD. Omit = offline.
 description: "Short summary used as meta description and social preview."
 
 # --- Optional: enables Scholar indexing & richer JSON-LD ---
-# authors:                    # If multi-author, fills citation_author and ScholarlyArticle.author[]
-#   - Seungeon Lee
-#   - Co-author Name
+# authors:                    # YAML list, same shape as publications/preprints.
+#   - Seungeon Lee            # Rendered by _layouts/talk.html with the owner's name
+#   - Co-author Name          # underlined — do NOT repeat an "Authors:" line in the body
+                              # (it would duplicate, and drift across en/ja/ko).
+                              # Solo talks may omit this; `presenter` is used instead.
 # affiliation: "Kyoto University Graduate School of Medicine, ..."
 # conference_title: "CBI Society Annual Meeting 2025"   # Defaults to venue if omitted
 # arxiv_id: "2512.23175"      # → citation_arxiv_id

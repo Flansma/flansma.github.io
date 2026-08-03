@@ -14,6 +14,12 @@ layout: default
 
     <div class="talk-venue" {% if page.venue_ja or page.venue_ko %}data-lang-en="{{ page.venue | escape }}" {% if page.venue_ja %}data-lang-ja="{{ page.venue_ja | escape }}"{% endif %} {% if page.venue_ko %}data-lang-ko="{{ page.venue_ko | escape }}"{% endif %}{% endif %}>{{ page.venue }}</div>
 
+    {% comment %}Authors render here, not in the body — same as publication/preprint
+    layouts. Keep them out of the body so they stay in one place across en/ja/ko.{% endcomment %}
+    {% if page.authors or page.presenter %}
+    <p class="biblio-meta">{% include authors-hl.html item=page %}.</p>
+    {% endif %}
+
     {% if page.image and page.image != site.default_image %}
     <div class="talk-hero">
       <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" loading="lazy" decoding="async">

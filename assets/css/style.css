@@ -637,7 +637,12 @@ a:focus, button:focus { outline: 2px solid var(--accent); outline-offset: 2px; }
   line-height: 1.6;
 }
 
-.work-authors .highlight-name {
+/* Owner's name in any author list (see _includes/authors-hl.html).
+   Deliberately unscoped: it was previously duplicated across
+   .work-authors / .biblio-meta / .section-meta / .selected-authors, so every new
+   section that listed authors rendered the highlight invisibly until someone
+   remembered to add its selector. One rule, works anywhere. */
+.highlight-name {
   font-weight: 600;
   color: var(--text-primary);
   text-decoration: underline;
@@ -695,15 +700,6 @@ a:focus, button:focus { outline: 2px solid var(--accent); outline-offset: 2px; }
   color: var(--text-muted);
 }
 
-.biblio-meta .highlight-name,
-.section-meta .highlight-name,
-.selected-authors .highlight-name {
-  font-weight: 600;
-  color: var(--text-primary);
-  text-decoration: underline;
-  text-decoration-color: var(--accent);
-  text-underline-offset: 3px;
-}
 
 /* ================================
    News feed (Recent Works)

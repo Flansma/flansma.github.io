@@ -28,7 +28,7 @@ To add a new content item, copy the matching scaffold from `_templates/` (exclud
 |---|---|---|
 | `_publications` | individual pages | `ScholarlyArticle` JSON-LD, `citation_*` meta (Google Scholar), DOI/PubMed/PMC identifiers |
 | `_preprints` | individual pages | `ScholarlyArticle` (preprint status), arXiv id |
-| `_talks` | individual pages | `Event` + nested `ScholarlyArticle` JSON-LD |
+| `_talks` | individual pages | `Event` + nested `ScholarlyArticle` JSON-LD (`attendance: online\|mixed\|offline` drives `eventAttendanceMode` and `VirtualLocation` vs `Place`; omitting it means in-person) |
 | `_awards` | no detail page | Appended to `Person.award[]` JSON-LD + AWARDS section |
 | `_writings` | no detail page | WRITINGS section + Recent Works (no detail page since these are typically external magazine articles) |
 
@@ -50,7 +50,11 @@ To add a new content item, copy the matching scaffold from `_templates/` (exclud
 
 **Recent Works aggregation** (`index.html`, search for `site.publications | concat:`). The feed concatenates all collections, sorts by date, and switches type label via a `{% case type %}` block. Adding a new collection requires updating three places: the `concat` chain, the type-label case block, and a `.type-badge.type-{name}` CSS rule in `assets/css/style.css`. The `mini-badge` for status currently shows for `type == 'article' or type == 'writing'` — extend the condition if other types need lifecycle badges.
 
-**Author name highlighting.** Liquid `replace` swaps `Seungeon Lee` → `<span class="highlight-name">…</span>`. The CSS for `.highlight-name` is scoped (`.biblio-meta .highlight-name`, `.section-meta .highlight-name`, `.work-authors .highlight-name`); when adding a new section that lists authors, either add its parent selector to the existing rule or the highlight will render but be invisible.
+**Author name highlighting** goes through one component: `{% include authors-hl.html item=<item> %}`. It underlines the owner's name (`.highlight-name`), reads that name from `_data/profile.yml` (`name.full`) rather than hardcoding it, and normalizes `authors` whether it's a YAML list or a legacy comma string, falling back to `presenter` for solo talks. Every author list on the site routes through it — `_includes/biblio-item.html`, the PRESENTATIONS loop and `.selected-authors`/`.section-meta` blocks in `index.html`, and the `publication`/`preprint`/`talk` layouts. Add authors to a new section by calling the include, never by re-implementing the `replace` filter. The `.highlight-name` CSS rule is deliberately unscoped so it works wherever the include lands.
+
+**Never put an author list inside an element carrying `data-lang-*`.** On language switch `i18n.js` deletes that element's text nodes and inserts the translated string; the highlighted `<span>` survives as an element while every co-author (a text node) vanishes. Put the `data-lang-*` attributes on an inner span wrapping only the translated text — see the venue span in the PRESENTATIONS loop. The same mechanism silently drops any other text (dates, separators) that shares an element with `data-lang-*`, so keep those elements text-only.
+
+**Authors live in front matter, not in the body.** Talk/publication layouts render the author line themselves. Repeating an `**Authors:**` line in the Markdown body duplicates it on the page and drifts out of sync with `content_ja`/`content_ko`.
 
 **i18n is intentionally partial** (`assets/js/i18n.js`). Fixed UI strings (nav labels, section titles, ABOUT body, hero tagline) swap client-side via the `I18N` dict by language. Bibliographic entries (publications/preprints/talks/awards/writings) stay in source language — a Japanese magazine article keeps its Japanese title across all language modes, by convention. To provide an English subtitle for a non-English entry, use the `subtitle:` field (renders in italic under the main title) — this matches J-STAGE/CiNii indexing conventions for Japanese commentary articles.
 

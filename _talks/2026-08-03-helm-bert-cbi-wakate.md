@@ -5,10 +5,16 @@ venue: "第18回 CBI若手の会講演会 (Online, Student Talk 5)"
 venue_ja: "第18回 CBI若手の会講演会（オンライン・学生発表５）"
 venue_ko: "제18회 CBI 젊은연구자모임 강연회 (온라인·학생발표 5)"
 presenter: Seungeon Lee
-authors: "Seungeon Lee, Takuto Koyama, Itsuki Maeda, Shigeyuki Matsumoto, Yasushi Okuno"
+authors:
+  - Seungeon Lee
+  - Takuto Koyama
+  - Itsuki Maeda
+  - Shigeyuki Matsumoto
+  - Yasushi Okuno
 affiliation: "Kyoto University Graduate School of Medicine, Department of Biomedical Data Intelligence"
 type: talk
 format: oral
+attendance: online
 conference_title: "第18回 CBI若手の会講演会"
 description: "Student talk (Award winner) at the 18th CBI Wakate-no-Kai Seminar presenting the published HELM-BERT work on topology-aware representations for chemically modified peptides, followed by discussion with early-career researchers."
 content_ja: |
@@ -22,8 +28,6 @@ content_ja: |
 
   **セッション:** 学生発表５（14:55–15:20）
 
-  **著者:** 李昇彦, 小山拓人, 前田樹, 松本篤幸, 奥野恭史
-
   **所属:** 京都大学大学院医学研究科 ビッグデータ医科学分野
 content_ko: |
   ## 개요
@@ -35,8 +39,6 @@ content_ko: |
   본 발표는 **우수강연상(優秀講演賞)**을 수상했습니다.
 
   **세션:** 学生発表５ (14:55–15:20)
-
-  **저자:** 이승언, 코야마 타쿠토, 마에다 이츠키, 마츠모토 시게유키, 오쿠노 야스시
 
   **소속:** 교토대학 대학원 의학연구과 빅데이터 의과학 분야
 links:
@@ -55,7 +57,5 @@ The talk presented the content of the HELM-BERT paper published in *Journal of C
 This presentation received the **Excellent Lecture Award (優秀講演賞)**.
 
 **Session:** 学生発表５ (14:55–15:20)
-
-**Authors:** Seungeon Lee, Takuto Koyama, Itsuki Maeda, Shigeyuki Matsumoto, Yasushi Okuno
 
 **Affiliation:** Kyoto University Graduate School of Medicine, Department of Biomedical Data Intelligence

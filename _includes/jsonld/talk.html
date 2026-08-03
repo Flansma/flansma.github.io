@@ -5,6 +5,16 @@
 {%- if _description == nil or _description == '' -%}
   {%- capture _description -%}{{ page.title }} — Talk by {{ page.presenter | default: prof.name.full }} at {{ page.venue }} ({{ page.date | date: "%Y-%m-%d" }}).{%- endcapture -%}
 {%- endif -%}
+{%- comment -%}
+  Attendance mode: `attendance: online | mixed | offline` in front matter.
+  Defaults to offline (an in-person venue) when the field is absent.
+{%- endcomment -%}
+{%- assign _att = page.attendance | default: 'offline' | downcase -%}
+{%- case _att -%}
+  {%- when 'online' -%}{%- assign _att_mode = 'Online' -%}
+  {%- when 'mixed' -%}{%- assign _att_mode = 'Mixed' -%}
+  {%- else -%}{%- assign _att_mode = 'Offline' -%}
+{%- endcase -%}
 {%- comment -%} Build authors list from front matter {%- endcomment -%}
 {%- assign _authors = '' | split: '' -%}
 {%- if page.authors -%}
@@ -23,10 +33,10 @@
   "name": {{ page.title | jsonify }},
   "startDate": "{{ _start }}",
   "endDate": "{{ _start }}",
-  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "eventAttendanceMode": "https://schema.org/{{ _att_mode }}EventAttendanceMode",
   "eventStatus": "https://schema.org/EventScheduled",
   "location": {
-    "@type": "Place",
+    "@type": "{% if _att == 'online' %}VirtualLocation{% else %}Place{% endif %}",
     "name": {{ page.venue | jsonify }}
   },
   "performer": {

@@ -1,0 +1,32 @@
+{%- comment -%}
+  Author list with the site owner's name underlined (.highlight-name).
+
+  Usage: {% include authors-hl.html item=p %}
+
+  Accepts any content item. `authors` may be a YAML list (publications, preprints)
+  or a comma-separated string (legacy talk entries); solo talks with only
+  `presenter` fall back to that. The owner's name comes from _data/profile.yml
+  (`name.full`) — do not hardcode it.
+
+  Two placement rules:
+  1. Must sit inside .biblio-meta / .section-meta / .selected-authors / .work-authors,
+     or .highlight-name renders but is invisible (the CSS is scoped — see CLAUDE.md).
+  2. Must NOT sit inside an element carrying data-lang-* . On language switch,
+     i18n.js strips that element's text nodes and replaces them with the translated
+     string, which would delete every co-author and leave only the highlighted span.
+{%- endcomment -%}
+{%- assign _authors = '' | split: '' -%}
+{%- if include.item.authors -%}
+  {%- if include.item.authors.first -%}
+    {%- assign _authors = include.item.authors -%}
+  {%- else -%}
+    {%- assign _authors = include.item.authors | split: ', ' -%}
+  {%- endif -%}
+{%- elsif include.item.presenter -%}
+  {%- assign _authors = include.item.presenter | split: ', ' -%}
+{%- endif -%}
+{%- assign _me = site.data.profile.name.full -%}
+{%- for a in _authors -%}
+  {%- if a == _me -%}<span class="highlight-name">{{ a }}</span>{%- else -%}{{ a }}{%- endif -%}
+  {%- unless forloop.last %}, {% endunless -%}
+{%- endfor -%}

@@ -65,7 +65,7 @@ description: "Seungeon Lee's portfolio site — AI-driven medium-sized peptide d
           </div>
           <div class="selected-title">{{ it.title }}</div>
           {% if it.authors %}
-          <div class="selected-authors">{{ it.authors | join: ', ' | replace: 'Seungeon Lee', '<span class="highlight-name">Seungeon Lee</span>' }}</div>
+          <div class="selected-authors">{% include authors-hl.html item=it %}</div>
           {% endif %}
           <div class="selected-links">
             {% if it.doi %}<span class="badge">DOI</span>{% endif %}
@@ -139,7 +139,9 @@ description: "Seungeon Lee's portfolio site — AI-driven medium-sized peptide d
         <li class="biblio-item">
           <a class="biblio-link" href="{{ t.url | relative_url }}">
             <span class="biblio-title" {% if t.title_ja or t.title_ko %}data-lang-en="{{ t.title | escape }}" {% if t.title_ja %}data-lang-ja="{{ t.title_ja | escape }}"{% endif %} {% if t.title_ko %}data-lang-ko="{{ t.title_ko | escape }}"{% endif %}{% endif %}>{{ t.title }}</span>
-            <span class="biblio-meta" {% if t.venue_ja or t.venue_ko %}data-lang-en="{{ t.venue | escape }}" {% if t.venue_ja %}data-lang-ja="{{ t.venue_ja | escape }}"{% endif %} {% if t.venue_ko %}data-lang-ko="{{ t.venue_ko | escape }}"{% endif %}{% endif %}>{{ t.venue }}. ({{ t.date | date: "%Y.%m.%d" }})
+            {% comment %}data-lang-* goes on a venue-only span: i18n.js replaces the
+            element's text nodes, so wrapping the authors/date too would delete them.{% endcomment %}
+            <span class="biblio-meta">{% include authors-hl.html item=t %}. ({{ t.date | date: "%Y.%m.%d" }}). <i><span {% if t.venue_ja or t.venue_ko %}data-lang-en="{{ t.venue | escape }}" {% if t.venue_ja %}data-lang-ja="{{ t.venue_ja | escape }}"{% endif %} {% if t.venue_ko %}data-lang-ko="{{ t.venue_ko | escape }}"{% endif %}{% endif %}>{{ t.venue }}</span></i>
               {% if t.format %}<span class="badge badge-{{ t.format }}">{{ t.format | upcase }}</span>{% endif %}
             </span>
             {% if t.image and t.image != site.default_image %}<img class="biblio-thumb" src="{{ t.image | relative_url }}" alt="{{ t.title }}" loading="lazy" decoding="async">{% endif %}
@@ -287,7 +289,7 @@ description: "Seungeon Lee's portfolio site — AI-driven medium-sized peptide d
         </div>
         {% if w.subtitle %}<div class="section-subtitle">{{ w.subtitle }}</div>{% endif %}
         <div class="section-meta">
-          {% if w.authors %}{% assign authors_str = w.authors | join: ', ' %}{{ authors_str | replace: 'Seungeon Lee', '<span class="highlight-name">Seungeon Lee</span>' }}. {% endif %}{{ w.venue }} — {{ w.date | date: "%Y" }}
+          {% if w.authors %}{% include authors-hl.html item=w %}. {% endif %}{{ w.venue }} — {{ w.date | date: "%Y" }}
         </div>
       </li>
       {% endfor %}
