@@ -8,12 +8,12 @@
   `presenter` fall back to that. The owner's name comes from _data/profile.yml
   (`name.full`) — do not hardcode it.
 
-  Two placement rules:
-  1. Must sit inside .biblio-meta / .section-meta / .selected-authors / .work-authors,
-     or .highlight-name renders but is invisible (the CSS is scoped — see CLAUDE.md).
-  2. Must NOT sit inside an element carrying data-lang-* . On language switch,
-     i18n.js strips that element's text nodes and replaces them with the translated
-     string, which would delete every co-author and leave only the highlighted span.
+  Placement: .highlight-name is unscoped CSS, so the underline works in any container.
+  The one hard rule is that this must NOT sit inside an element carrying data-lang-* .
+  On language switch i18n.js replaces that element's text nodes with the translated
+  string; co-author names are bare text nodes, so they would all be deleted while the
+  highlighted <span> survived as an element. Put data-lang-* on an inner span that
+  wraps only the translated text (see the venue span in index.html's PRESENTATIONS loop).
 {%- endcomment -%}
 {%- assign _authors = '' | split: '' -%}
 {%- if include.item.authors -%}

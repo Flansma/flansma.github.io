@@ -56,6 +56,10 @@ window.applyI18n = function(lang) {
     if (typeof v === 'string') el.innerHTML = v;
   });
   // Swap multilingual text content (data-lang-en, data-lang-ja, data-lang-ko)
+  // Note: deliberately does NOT set `lang` on swapped elements. `data-lang-en` means
+  // "what to show in EN mode", not "English text" — a venue's EN variant is usually
+  // the Japanese source name. Language of parts is marked statically instead, on the
+  // regions that really are fixed English (see index.html / _layouts/talk.html).
   document.querySelectorAll('[data-lang-en]').forEach(el => {
     const text = el.getAttribute('data-lang-' + lang) || el.getAttribute('data-lang-en');
     if (text) {

@@ -7,9 +7,13 @@
         <img src="{{ '/assets/img/okuno-lab-logo-white.png' | relative_url }}" alt="Okuno Lab" width="500" height="500" loading="lazy" decoding="async">
       </a>
       <div class="header-affiliation">
-        <span class="affiliation-short" data-lang-en="{{ aff.short.en }}" data-lang-ja="{{ aff.short.ja }}" data-lang-ko="{{ aff.short.ko }}">{{ aff.short.ja }}</span>
-        <span class="affiliation-line1" data-lang-en="{{ aff.lines[0].en }}" data-lang-ja="{{ aff.lines[0].ja }}" data-lang-ko="{{ aff.lines[0].ko }}">{{ aff.lines[0].ja }}</span>
-        <span class="affiliation-line2" data-lang-en="{{ aff.lines[1].en }}" data-lang-ja="{{ aff.lines[1].ja }}" data-lang-ko="{{ aff.lines[1].ko }}">{{ aff.lines[1].ja }}</span>
+        {% comment %}Inline text must be the EN variant: the served HTML says
+        <html lang="en">, and this was the only place defaulting to Japanese — so a
+        no-JS reader (and the first paint for everyone) got a Japanese header on an
+        otherwise English page. i18n.js swaps these on switch.{% endcomment %}
+        <span class="affiliation-short" data-lang-en="{{ aff.short.en }}" data-lang-ja="{{ aff.short.ja }}" data-lang-ko="{{ aff.short.ko }}">{{ aff.short.en }}</span>
+        <span class="affiliation-line1" data-lang-en="{{ aff.lines[0].en }}" data-lang-ja="{{ aff.lines[0].ja }}" data-lang-ko="{{ aff.lines[0].ko }}">{{ aff.lines[0].en }}</span>
+        <span class="affiliation-line2" data-lang-en="{{ aff.lines[1].en }}" data-lang-ja="{{ aff.lines[1].ja }}" data-lang-ko="{{ aff.lines[1].ko }}">{{ aff.lines[1].en }}</span>
       </div>
     </div>
 
@@ -35,8 +39,8 @@
         <button type="button" data-lang="ko" aria-label="한국어" onclick="setLang('ko')">KO</button>
       </div>
       <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
-        <span class="material-icons-outlined icon-light">light_mode</span>
-        <span class="material-icons-outlined icon-dark">dark_mode</span>
+        {% include icon.html name="light_mode" class="icon-light" %}
+        {% include icon.html name="dark_mode" class="icon-dark" %}
       </button>
       <button type="button" class="menu-toggle" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
         <span class="menu-icon"></span>

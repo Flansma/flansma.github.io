@@ -13,15 +13,39 @@
 {% include citation_meta.html %}
 {% include article_meta.html %}
 
+{% comment %}
+  Fonts: Inter only, as a variable axis (wght@400..700 is one woff2, same bytes as
+  listing discrete weights, and it makes font-weight:500 real instead of silently
+  snapping to 400). CJK is served from the reader's OS fonts — see the body stack
+  in style.css. Noto Sans KR used to be requested here and cost ~1.9 MB of woff2
+  per visit; Material Icons cost 155 KB for eight glyphs and is now inline SVG
+  (_includes/icon.html). Do not reintroduce either without measuring.
+{% endcomment %}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="image" href="{{ '/assets/img/face.jpg' | relative_url }}">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+KR:wght@400;700&display=swap" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&display=swap" media="print" onload="this.media='all'">
 <noscript>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+KR:wght@400;700&display=swap">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&display=swap">
 </noscript>
+{% comment %}
+  Theme + JS bootstrap. Must run before the stylesheet so the first paint already
+  carries the right palette: script.js only runs at DOMContentLoaded, which made
+  dark-mode readers see a white flash then a 300ms fade on every navigation.
+  The `js` class gates the scroll-reveal in CSS, so with JS off (or in print,
+  or under reduced-motion) content is never left at opacity:0.
+{% endcomment %}
+<script>
+  (function () {
+    var d = document.documentElement;
+    d.className += ' js';
+    try {
+      var t = localStorage.getItem('theme');
+      if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      d.setAttribute('data-theme', t);
+    } catch (e) {}
+  })();
+</script>
 <link href="{{ '/assets/css/style.css' | relative_url }}" media="all" rel="stylesheet" type="text/css">
 <script src="{{ '/assets/js/i18n.js' | relative_url }}" defer></script>
 {% include jsonld.html %}

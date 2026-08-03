@@ -16,6 +16,8 @@ arxiv_id: "2512.23175"
 conference_title: "CBI Society Annual Meeting 2025"
 description: "Oral presentation (Award winner) at CBI 2025 introducing HELM-BERT, a transformer for medium-sized peptide property prediction using HELM notation."
 image: /assets/img/talks/cbi2025-oral.jpg
+image_width: 1568
+image_height: 2409
 links:
   - label: Oral list (EN)
     url: https://cbi-society.org/taikai/taikai25/abstract_oral_list_e.html

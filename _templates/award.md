@@ -11,6 +11,8 @@ type: award
 
 # --- Optional ---
 # image: /assets/img/awards/filename.png
+# image_width: 2400            # REQUIRED with image: — intrinsic pixel size, else the
+# image_height: 1800           # accordion photo has no reserved height (CLS).
 # links:
 #   - label: Award announcement
 #     url: https://...

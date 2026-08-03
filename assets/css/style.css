@@ -53,7 +53,14 @@
 }
 
 body {
-  font-family: "Inter", "Noto Sans KR", "Helvetica Neue", Arial, sans-serif;
+  /* Inter (webfont) covers Latin. CJK falls through to the reader's OS fonts —
+     per-locale families in priority order, so Japanese text gets Japanese glyph
+     forms rather than the Korean-locale shapes "Noto Sans KR" used to impose.
+     Fetching Noto Sans KR cost ~1.9 MB of woff2 on every page; the OS families
+     below are already installed on every platform this site is read on. */
+  font-family: "Inter", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic",
+    "Noto Sans CJK JP", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans CJK KR",
+    "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
   letter-spacing: .03em;
   color: var(--text-primary);
@@ -96,6 +103,32 @@ ul {
 
 .section:nth-of-type(odd) {
   background-color: var(--bg-secondary);
+}
+
+/* Scroll reveal. Gated on `.js` (set by the head bootstrap) so content is never
+   left invisible when JS is off, and on prefers-reduced-motion so it is never
+   invisible for readers who asked for no animation. script.js adds .is-visible. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js .section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity .6s ease, transform .6s ease;
+  }
+
+  html.js .section.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Printing and PDF export do not re-run IntersectionObserver — this is the page
+   people save as a CV, so force every section visible. */
+@media print {
+  .section {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
 
 .container {
@@ -244,8 +277,9 @@ ul {
   background: rgba(255,255,255,0.08);
 }
 
-.theme-toggle .material-icons-outlined {
-  font-size: 16px;
+.theme-toggle .icon {
+  width: 16px;
+  height: 16px;
   color: rgba(255,255,255,0.8);
   display: block;
 }
@@ -364,6 +398,11 @@ ul {
 /* Focus ring */
 a:focus, button:focus { outline: 2px solid var(--accent); outline-offset: 2px; }
 
+/* <main> is programmatically focusable so the skip link can move focus into it.
+   No ring for that programmatic focus; keyboard-driven focus still shows one. */
+.content:focus { outline: none; }
+.content:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
 .lang-switch {
   display: flex;
   align-items: center;
@@ -455,21 +494,6 @@ a:focus, button:focus { outline: 2px solid var(--accent); outline-offset: 2px; }
   border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
-}
-
-.profile-placeholder {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #e0e5ec 0%, #c8d0da 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-}
-
-.profile-placeholder .material-icons-outlined {
-  font-size: 64px;
-  color: #8a95a5;
 }
 
 .profile-img img {
@@ -795,8 +819,9 @@ a:focus, button:focus { outline: 2px solid var(--accent); outline-offset: 2px; }
   flex-shrink: 0;
 }
 
-.skill-icon .material-icons-outlined {
-  font-size: 24px;
+.skill-icon .icon {
+  width: 24px;
+  height: 24px;
   color: #fff;
 }
 
@@ -851,8 +876,9 @@ a.contact-item:hover {
   background: var(--accent-light);
 }
 
-.contact-item .material-icons-outlined {
-  font-size: 18px;
+.contact-item .icon {
+  width: 18px;
+  height: 18px;
   color: var(--accent);
 }
 
@@ -890,9 +916,10 @@ a.contact-item:hover {
   background-color: var(--accent);
 }
 
-.page-top .material-icons-outlined {
+.page-top .icon {
+  width: 22px;
+  height: 22px;
   color: #fff;
-  font-size: 22px;
 }
 
 /* ================================
@@ -1321,7 +1348,9 @@ a.contact-item:hover {
 .award-header:hover { opacity: 0.7; }
 .award-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
 .award-accordion.open .award-body { max-height: 600px; }
-.award-photo { width: 100%; max-width: 480px; border-radius: 8px; margin-top: 12px; }
+/* height:auto lets the width/height attributes supply the aspect ratio, so the
+   box reserves space before the image decodes instead of collapsing to zero. */
+.award-photo { width: 100%; height: auto; max-width: 480px; border-radius: 8px; margin-top: 12px; }
 .award-links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
 
 /* ================================
@@ -1329,7 +1358,7 @@ a.contact-item:hover {
    ================================ */
 .talk-venue { color: var(--text-muted); font-size: 15px; margin-bottom: 24px; }
 .talk-hero { margin-bottom: 32px; }
-.talk-hero img { width: 100%; max-width: 640px; border-radius: 8px; }
+.talk-hero img { width: 100%; height: auto; max-width: 640px; border-radius: 8px; }
 
 .badge-active { color:#065f46; background:#d1fae5; border-color:#a7f3d0; }
 .badge-completed { color:#1f2937; background:#e5e7eb; border-color:#d1d5db; }

@@ -11,6 +11,8 @@ type: talk
 format: invited
 description: "Invited lecture at Yokawa Hospital (Hyogo) for ~60-70 staff covering practical LLM adoption for healthcare workflows, custom GPTs, and information security."
 image: /assets/img/talks/yokawa-chatgpt-2026.jpg
+image_width: 1280
+image_height: 960
 content_ja: |
   ## 概要
 

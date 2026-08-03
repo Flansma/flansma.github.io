@@ -7,16 +7,19 @@
 
 <body>
   <a href="#content" class="skip-link">Skip to content</a>
-  <div class="wrapper" id="content">
+  <div class="wrapper">
 
     {% include header.html %}
 
-    <main class="content">
+    {% comment %}id="content" belongs here, not on .wrapper — .wrapper contains the
+    header, so the skip link used to land the reader back on the site logo.
+    tabindex="-1" makes <main> programmatically focusable so focus actually moves.{% endcomment %}
+    <main class="content" id="content" tabindex="-1">
       {{ content }}
     </main>
 
     <div class="page-top" id="js-page-top">
-      <span class="material-icons-outlined">expand_less</span>
+      {% include icon.html name="expand_less" %}
     </div>
 
     {% include footer.html %}

@@ -45,7 +45,8 @@ description: "Seungeon Lee's portfolio site — AI-driven medium-sized peptide d
     {% assign featured_pre = site.preprints   | where: 'featured', true %}
     {% assign featured = featured_pub | concat: featured_pre %}
     {% assign featured = featured | sort: 'date' | reverse %}
-    <div class="selected-list">
+    <!-- lang="en": author names and paper titles are fixed English in every mode -->
+    <div class="selected-list" lang="en">
       {% for it in featured %}
         {% assign href = '#' %}
         {% assign is_external = false %}
@@ -113,28 +114,28 @@ description: "Seungeon Lee's portfolio site — AI-driven medium-sized peptide d
 
     {% if arts and arts.size > 0 %}
     <h3 class="works-type"><span data-i18n="labels.articles">ARTICLES</span></h3>
-    <ol class="biblio-list">
+    <ol class="biblio-list" lang="en">
       {% for p in arts %}{% include biblio-item.html p=p badge="status" %}{% endfor %}
     </ol>
     {% endif %}
 
     {% if confs and confs.size > 0 %}
     <h3 class="works-type"><span data-i18n="labels.conference">CONFERENCE PAPERS</span></h3>
-    <ol class="biblio-list">
+    <ol class="biblio-list" lang="en">
       {% for p in confs %}{% include biblio-item.html p=p %}{% endfor %}
     </ol>
     {% endif %}
 
     {% if pres and pres.size > 0 %}
     <h3 class="works-type"><span data-i18n="labels.preprints">PREPRINTS</span></h3>
-    <ol class="biblio-list">
+    <ol class="biblio-list" lang="en">
       {% for p in pres %}{% include biblio-item.html p=p badge="preprint" %}{% endfor %}
     </ol>
     {% endif %}
 
     {% if talks and talks.size > 0 %}
     <h3 class="works-type"><span data-i18n="labels.presentations">PRESENTATIONS</span></h3>
-    <ol class="biblio-list">
+    <ol class="biblio-list" lang="en">
       {% for t in talks %}
         <li class="biblio-item">
           <a class="biblio-link" href="{{ t.url | relative_url }}">
@@ -161,7 +162,7 @@ description: "Seungeon Lee's portfolio site — AI-driven medium-sized peptide d
     {% assign items = site.publications | concat: site.preprints | concat: site.talks | concat: site.awards | concat: site.writings %}
     {% assign items = items | sort: 'date' | reverse %}
 
-    <div class="news-feed">
+    <div class="news-feed" lang="en">
       {% for it in items %}
         {% assign href = '#' %}
         {% assign is_external = false %}
@@ -223,7 +224,7 @@ description: "Seungeon Lee's portfolio site — AI-driven medium-sized peptide d
         {% if a.image and a.image != site.default_image %}{% assign has_photo = true %}{% endif %}
         {% if has_photo or a.links %}
         <div class="award-body">
-          {% if has_photo %}<img class="award-photo" src="{{ a.image | relative_url }}" alt="{{ a.title }}" loading="lazy" decoding="async">{% endif %}
+          {% if has_photo %}<img class="award-photo" src="{{ a.image | relative_url }}" alt="{{ a.title }}"{% if a.image_width and a.image_height %} width="{{ a.image_width }}" height="{{ a.image_height }}"{% endif %} loading="lazy" decoding="async">{% endif %}
           {% if a.links %}
           <div class="award-links">
             {% for link in a.links %}
@@ -302,11 +303,11 @@ description: "Seungeon Lee's portfolio site — AI-driven medium-sized peptide d
 <section class="skill section" id="skill">
   <div class="container">
     <h2 class="title" data-i18n="nav.skill">SKILL</h2>
-    <div class="skill-list">
+    <div class="skill-list" lang="en">
       {% for s in site.data.skills %}
       <div class="skill-item">
         <div class="skill-icon">
-          <span class="material-icons-outlined">{{ s.icon }}</span>
+          {% include icon.html name=s.icon %}
         </div>
         <div class="skill-body">
           <h3 class="skill-name">{{ s.name }}</h3>
@@ -334,7 +335,7 @@ description: "Seungeon Lee's portfolio site — AI-driven medium-sized peptide d
       </a>
       {% endfor %}
       <span class="contact-item contact-email-item">
-        <span class="material-icons-outlined">mail</span> {{ prof.email | replace: '@', '[at]' }}
+        {% include icon.html name="mail" %} {{ prof.email | replace: '@', '[at]' }}
       </span>
     </div>
   </div>

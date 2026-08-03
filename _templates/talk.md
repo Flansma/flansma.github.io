@@ -28,7 +28,11 @@ description: "Short summary used as meta description and social preview."
 # arxiv_id: "2512.23175"      # → citation_arxiv_id
 # doi: "10.xxxx/yyy"          # → citation_doi
 # pdf_url: https://...        # → citation_pdf_url (auto-detected from links if any link ends in .pdf)
-# image: /assets/img/talks/filename.jpg   # og:image override (place photo in assets/img/talks/ first)
+# image: /assets/img/talks/filename.jpg   # og:image override + page hero (place photo in assets/img/talks/ first)
+# image_width: 1280                       # REQUIRED with image: — intrinsic pixel size.
+# image_height: 960                       # Jekyll can't measure images (no plugins on
+                                          # GH Pages); without these the hero reserves
+                                          # no height and the page jumps on decode.
 
 # --- Multilingual (used by current JS i18n; preserved for future static i18n) ---
 # title_ja: "..."
