@@ -880,6 +880,7 @@ a.contact-item:hover {
   width: 18px;
   height: 18px;
   color: var(--accent);
+  flex-shrink: 0;  /* .contact-item is inline-flex; matches .contact-icon */
 }
 
 .contact-icon {
