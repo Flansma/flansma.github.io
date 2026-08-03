@@ -91,6 +91,15 @@ Each image file maps to exactly one role — don't reuse across roles:
 | `assets/img/face.jpg` | 531×531 square | Identity headshot | apple-touch-icon, ABOUT profile-img, Person.image JSON-LD |
 | `assets/img/pwa-icon-512.png` | 512×512 square | PWA install icon | `manifest.webmanifest` only |
 | `assets/img/og-card.jpg` | 1200×630 landscape | Social share card | Site-wide default `image:` (`_config.yml`), all JSON-LD content fallbacks |
+
+`og-card.jpg` is a landscape crop of `talks/cbi2025-oral.jpg`, cut so the presenter's head is intact and the slide title stays legible. It is regenerable — do not hand-crop it centred, which cuts the crown of the head off (that was the previous version):
+
+```bash
+sips -c 823 1568 --cropOffset 470 0 assets/img/talks/cbi2025-oral.jpg --out assets/img/og-card.jpg
+sips --resampleWidth 1200 assets/img/og-card.jpg --out assets/img/og-card.jpg
+```
+
+Caveat to keep in mind when it is next revisited: one talk's photo serves as the card for *every* page, so the slide visible in it names an older title than, say, the JCIM publication page it fronts. A photo-free typographic card would be page-agnostic; this is a deliberate trade for now.
 | `assets/img/favicon.svg` | vector "SL" letters | Browser tab + small icons | `<link rel="icon">` |
 | `assets/img/okuno-lab-logo-white.png` | square | Lab affiliation logo | `_includes/header.html` (header brand) |
 
