@@ -8,5 +8,5 @@ authors:
   - Seungeon Lee
   - Yasushi Okuno
 type: writing
-link: https://www.cmcbooks.co.jp/user_data/bio_nendobetsu.php
+link: https://www.cmcbooks.co.jp/products/detail.php?product_id=116303
 ---
