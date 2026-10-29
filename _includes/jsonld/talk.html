@@ -85,8 +85,13 @@
   "location": {% if _att == 'online' %}{{ _virtual_json }}{% elsif _att == 'mixed' %}[{{ _place_json }}, {{ _virtual_json }}]{% else %}{{ _place_json }}{% endif %},
   "performer": {
     "@type": "Person",
+    {%- comment -%}Only the owner is /#person. A co-authored poster presented by a
+    labmate must not carry that @id, or the graph merges them into the owner.{%- endcomment -%}
+    {%- assign _presenter = page.presenter | default: prof.name.full -%}
+    {%- if _presenter == prof.name.full %}
     "@id": "{{ '/#person' | absolute_url }}",
-    "name": {{ page.presenter | default: prof.name.full | jsonify }}{% if page.affiliation %},
+    {%- endif %}
+    "name": {{ _presenter | jsonify }}{% if page.affiliation %},
     "affiliation": {
       "@type": "Organization",
       "name": {{ page.affiliation | jsonify }}
